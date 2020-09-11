@@ -1,0 +1,5806 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>PROTOCOLO VICOMTECH</title>
+    <style>
+      @charset "UTF-8";
+      @import "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css";
+      #button {
+        background-color: #008CBA;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+      .div {
+        display: none;
+      }
+      .show {
+        display: block;
+      }
+      code {
+        color: #c7254e;
+        background-color: #f9f2f4;
+        border-radius: 4px;
+      }
+      code,
+      kbd {
+        padding: 2px 4px;
+      }
+      kbd {
+        color: #fff;
+        background-color: #333;
+        border-radius: 3px;
+        box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+      }
+      kbd kbd {
+        padding: 0;
+        font-size: 100%;
+        box-shadow: none;
+      }
+      pre {
+        display: block;
+        margin: 0 0 10px;
+        word-break: break-all;
+        word-wrap: break-word;
+        color: #333;
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      pre code {
+        padding: 0;
+        font-size: inherit;
+        color: inherit;
+        white-space: pre-wrap;
+        background-color: transparent;
+        border-radius: 0;
+      }
+      .pre-scrollable {
+        max-height: 340px;
+        overflow-y: scroll;
+      }
+      table {
+        background-color: transparent;
+      }
+      th {
+        text-align: left;
+      }
+      .table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+      }
+      .table > thead > tr > th {
+        padding: 8px;
+        line-height: 1.4285714;
+        border-top: 1px solid #ddd;
+      }
+      .table > thead > tr > td,
+      .table > tbody > tr > th,
+      .table > tbody > tr > td,
+      .table > tfoot > tr > th,
+      .table > tfoot > tr > td {
+        padding: 8px;
+        line-height: 1.4285714;
+        vertical-align: top;
+        border-top: 1px solid #ddd;
+      }
+      .table > thead > tr > th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #ddd;
+      }
+      .table > caption + thead > tr:first-child > th,
+      .table > caption + thead > tr:first-child > td,
+      .table > colgroup + thead > tr:first-child > th,
+      .table > colgroup + thead > tr:first-child > td,
+      .table > thead:first-child > tr:first-child > th,
+      .table > thead:first-child > tr:first-child > td {
+        border-top: 0;
+      }
+      .table > tbody + tbody {
+        border-top: 2px solid #ddd;
+      }
+      .table .table {
+        background-color: #fff;
+      }
+      .table-condensed > thead > tr > th,
+      .table-condensed > thead > tr > td,
+      .table-condensed > tbody > tr > th,
+      .table-condensed > tbody > tr > td,
+      .table-condensed > tfoot > tr > th,
+      .table-condensed > tfoot > tr > td {
+        padding: 5px;
+      }
+      .table-bordered,
+      .table-bordered > thead > tr > th,
+      .table-bordered > thead > tr > td,
+      .table-bordered > tbody > tr > th,
+      .table-bordered > tbody > tr > td,
+      .table-bordered > tfoot > tr > th,
+      .table-bordered > tfoot > tr > td {
+        border: 1px solid #ddd;
+      }
+      .table-bordered > thead > tr > th,
+      .table-bordered > thead > tr > td {
+        border-bottom-width: 2px;
+      }
+      .table-striped > tbody > tr:nth-child(odd) > td,
+      .table-striped > tbody > tr:nth-child(odd) > th {
+        background-color: #f9f9f9;
+      }
+      .table-hover > tbody > tr:hover > td,
+      .table-hover > tbody > tr:hover > th {
+        background-color: #f5f5f5;
+      }
+      table col[class*="col-"] {
+        position: static;
+        float: none;
+        display: table-column;
+      }
+      table td[class*="col-"],
+      table th[class*="col-"] {
+        position: static;
+        float: none;
+        display: table-cell;
+      }
+      .table > thead > tr > td.active,
+      .table > thead > tr > th.active,
+      .table > thead > tr.active > td,
+      .table > thead > tr.active > th,
+      .table > tbody > tr > td.active,
+      .table > tbody > tr > th.active,
+      .table > tbody > tr.active > td,
+      .table > tbody > tr.active > th,
+      .table > tfoot > tr > td.active,
+      .table > tfoot > tr > th.active,
+      .table > tfoot > tr.active > td,
+      .table > tfoot > tr.active > th {
+        background-color: #f5f5f5;
+      }
+      .table-hover > tbody > tr > td.active:hover,
+      .table-hover > tbody > tr > th.active:hover,
+      .table-hover > tbody > tr.active:hover > td,
+      .table-hover > tbody > tr:hover > .active,
+      .table-hover > tbody > tr.active:hover > th {
+        background-color: #e8e8e8;
+      }
+      .table > thead > tr > td.success,
+      .table > thead > tr > th.success,
+      .table > thead > tr.success > td,
+      .table > thead > tr.success > th,
+      .table > tbody > tr > td.success,
+      .table > tbody > tr > th.success,
+      .table > tbody > tr.success > td,
+      .table > tbody > tr.success > th,
+      .table > tfoot > tr > td.success,
+      .table > tfoot > tr > th.success,
+      .table > tfoot > tr.success > td,
+      .table > tfoot > tr.success > th {
+        background-color: #dff0d8;
+      }
+      .table-hover > tbody > tr > td.success:hover,
+      .table-hover > tbody > tr > th.success:hover,
+      .table-hover > tbody > tr.success:hover > td,
+      .table-hover > tbody > tr:hover > .success,
+      .table-hover > tbody > tr.success:hover > th {
+        background-color: #d0e9c6;
+      }
+      .table > thead > tr > td.info,
+      .table > thead > tr > th.info,
+      .table > thead > tr.info > td,
+      .table > thead > tr.info > th,
+      .table > tbody > tr > td.info,
+      .table > tbody > tr > th.info,
+      .table > tbody > tr.info > td,
+      .table > tbody > tr.info > th,
+      .table > tfoot > tr > td.info,
+      .table > tfoot > tr > th.info,
+      .table > tfoot > tr.info > td,
+      .table > tfoot > tr.info > th {
+        background-color: #d9edf7;
+      }
+      .table-hover > tbody > tr > td.info:hover,
+      .table-hover > tbody > tr > th.info:hover,
+      .table-hover > tbody > tr.info:hover > td,
+      .table-hover > tbody > tr:hover > .info,
+      .table-hover > tbody > tr.info:hover > th {
+        background-color: #c4e3f3;
+      }
+      .table > thead > tr > td.warning,
+      .table > thead > tr > th.warning,
+      .table > thead > tr.warning > td,
+      .table > thead > tr.warning > th,
+      .table > tbody > tr > td.warning,
+      .table > tbody > tr > th.warning,
+      .table > tbody > tr.warning > td,
+      .table > tbody > tr.warning > th,
+      .table > tfoot > tr > td.warning,
+      .table > tfoot > tr > th.warning,
+      .table > tfoot > tr.warning > td,
+      .table > tfoot > tr.warning > th {
+        background-color: #fcf8e3;
+      }
+      .table-hover > tbody > tr > td.warning:hover,
+      .table-hover > tbody > tr > th.warning:hover,
+      .table-hover > tbody > tr.warning:hover > td,
+      .table-hover > tbody > tr:hover > .warning,
+      .table-hover > tbody > tr.warning:hover > th {
+        background-color: #faf2cc;
+      }
+      .table > thead > tr > td.danger,
+      .table > thead > tr > th.danger,
+      .table > thead > tr.danger > td,
+      .table > thead > tr.danger > th,
+      .table > tbody > tr > td.danger,
+      .table > tbody > tr > th.danger,
+      .table > tbody > tr.danger > td,
+      .table > tbody > tr.danger > th,
+      .table > tfoot > tr > td.danger,
+      .table > tfoot > tr > th.danger,
+      .table > tfoot > tr.danger > td,
+      .table > tfoot > tr.danger > th {
+        background-color: #f2dede;
+      }
+      .table-hover > tbody > tr > td.danger:hover,
+      .table-hover > tbody > tr > th.danger:hover,
+      .table-hover > tbody > tr.danger:hover > td,
+      .table-hover > tbody > tr:hover > .danger,
+      .table-hover > tbody > tr.danger:hover > th {
+        background-color: #ebcccc;
+      }
+      fieldset {
+        border: 0;
+        min-width: 0;
+      }
+      legend {
+        display: block;
+        width: 100%;
+        margin-bottom: 20px;
+        font-size: 21px;
+        line-height: inherit;
+        color: #333;
+        border-bottom: 1px solid #e5e5e5;
+      }
+      label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 700;
+      }
+      input[type="radio"],
+      input[type="checkbox"] {
+        margin: 4px 0 0;
+        margin-top: 1px \9;
+        line-height: normal;
+      }
+      input[type="file"] {
+        display: block;
+      }
+      input[type="range"] {
+        display: block;
+        width: 100%;
+      }
+      select[multiple],
+      select[size] {
+        height: auto;
+      }
+      input[type="file"]:focus,
+      input[type="radio"]:focus,
+      input[type="checkbox"]:focus {
+        outline: thin dotted;
+        outline: 5px auto -webkit-focus-ring-color;
+        outline-offset: -2px;
+      }
+      output {
+        padding-top: 7px;
+      }
+      output,
+      .form-control {
+        display: block;
+        font-size: 14px;
+        line-height: 1.4285714;
+        color: #555;
+      }
+      .form-control {
+        width: 100%;
+        height: 34px;
+        padding: 6px 12px;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+      }
+      .form-control:focus {
+        border-color: #66afe9;
+        outline: 0;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+          0 0 8px rgba(102, 175, 233, 0.6);
+      }
+      .form-control::-moz-placeholder {
+        color: #777;
+        opacity: 1;
+      }
+      .form-control:-ms-input-placeholder {
+        color: #777;
+      }
+      .form-control::-webkit-input-placeholder {
+        color: #777;
+      }
+      .form-control[disabled],
+      .form-control[readonly],
+      fieldset[disabled] .form-control {
+        cursor: not-allowed;
+        background-color: #eee;
+        opacity: 1;
+      }
+      textarea.form-control {
+        height: auto;
+      }
+      input[type="date"],
+      input[type="time"],
+      input[type="datetime-local"],
+      input[type="month"] {
+        line-height: 34px;
+        line-height: 1.4285714 \0;
+      }
+      input[type="date"].input-sm,
+      .form-horizontal .form-group-sm input.form-control[type="date"],
+      .input-group-sm > input.form-control[type="date"],
+      .input-group-sm > input.input-group-addon[type="date"],
+      .input-group-sm > .input-group-btn > input.btn[type="date"],
+      input[type="time"].input-sm,
+      .form-horizontal .form-group-sm input.form-control[type="time"],
+      .input-group-sm > input.form-control[type="time"],
+      .input-group-sm > input.input-group-addon[type="time"],
+      .input-group-sm > .input-group-btn > input.btn[type="time"],
+      input[type="datetime-local"].input-sm,
+      .form-horizontal .form-group-sm input.form-control[type="datetime-local"],
+      .input-group-sm > input.form-control[type="datetime-local"],
+      .input-group-sm > input.input-group-addon[type="datetime-local"],
+      .input-group-sm > .input-group-btn > input.btn[type="datetime-local"],
+      input[type="month"].input-sm,
+      .form-horizontal .form-group-sm input.form-control[type="month"],
+      .input-group-sm > input.form-control[type="month"],
+      .input-group-sm > input.input-group-addon[type="month"],
+      .input-group-sm > .input-group-btn > input.btn[type="month"] {
+        line-height: 30px;
+      }
+      input[type="date"].input-lg,
+      .form-horizontal .form-group-lg input.form-control[type="date"],
+      .input-group-lg > input.form-control[type="date"],
+      .input-group-lg > input.input-group-addon[type="date"],
+      .input-group-lg > .input-group-btn > input.btn[type="date"],
+      input[type="time"].input-lg,
+      .form-horizontal .form-group-lg input.form-control[type="time"],
+      .input-group-lg > input.form-control[type="time"],
+      .input-group-lg > input.input-group-addon[type="time"],
+      .input-group-lg > .input-group-btn > input.btn[type="time"],
+      input[type="datetime-local"].input-lg,
+      .form-horizontal .form-group-lg input.form-control[type="datetime-local"],
+      .input-group-lg > input.form-control[type="datetime-local"],
+      .input-group-lg > input.input-group-addon[type="datetime-local"],
+      .input-group-lg > .input-group-btn > input.btn[type="datetime-local"],
+      input[type="month"].input-lg,
+      .form-horizontal .form-group-lg input.form-control[type="month"],
+      .input-group-lg > input.form-control[type="month"],
+      .input-group-lg > input.input-group-addon[type="month"],
+      .input-group-lg > .input-group-btn > input.btn[type="month"] {
+        line-height: 46px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .radio,
+      .checkbox {
+        position: relative;
+        display: block;
+        min-height: 20px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .radio label,
+      .checkbox label {
+        padding-left: 20px;
+        margin-bottom: 0;
+        font-weight: 400;
+        cursor: pointer;
+      }
+      .radio input[type="radio"],
+      .radio-inline input[type="radio"],
+      .checkbox input[type="checkbox"],
+      .checkbox-inline input[type="checkbox"] {
+        position: absolute;
+        margin-left: -20px;
+        margin-top: 4px \9;
+      }
+      .radio + .radio,
+      .checkbox + .checkbox {
+        margin-top: -5px;
+      }
+      .radio-inline,
+      .checkbox-inline {
+        display: inline-block;
+        padding-left: 20px;
+        margin-bottom: 0;
+        vertical-align: middle;
+        font-weight: 400;
+        cursor: pointer;
+      }
+      .radio-inline + .radio-inline,
+      .checkbox-inline + .checkbox-inline {
+        margin-top: 0;
+        margin-left: 10px;
+      }
+      input[type="radio"][disabled],
+      input[type="radio"].disabled,
+      fieldset[disabled] input[type="radio"],
+      input[type="checkbox"][disabled],
+      input[type="checkbox"].disabled,
+      fieldset[disabled] input[type="checkbox"],
+      .radio-inline.disabled,
+      fieldset[disabled] .radio-inline,
+      .checkbox-inline.disabled,
+      fieldset[disabled] .checkbox-inline,
+      .radio.disabled label,
+      fieldset[disabled] .radio label,
+      .checkbox.disabled label,
+      fieldset[disabled] .checkbox label {
+        cursor: not-allowed;
+      }
+      .form-control-static {
+        padding-top: 7px;
+        padding-bottom: 7px;
+        margin-bottom: 0;
+      }
+      .form-control-static.input-lg,
+      .form-horizontal .form-group-lg .form-control-static.form-control,
+      .input-group-lg > .form-control-static.form-control,
+      .input-group-lg > .form-control-static.input-group-addon,
+      .input-group-lg > .input-group-btn > .form-control-static.btn,
+      .form-control-static.input-sm,
+      .form-horizontal .form-group-sm .form-control-static.form-control,
+      .input-group-sm > .form-control-static.form-control,
+      .input-group-sm > .form-control-static.input-group-addon,
+      .input-group-sm > .input-group-btn > .form-control-static.btn {
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .input-sm,
+      .form-horizontal .form-group-sm .form-control,
+      .input-group-sm > .form-control {
+        height: 30px;
+        padding: 5px 10px;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 3px;
+      }
+      .input-group-sm > .input-group-addon {
+        height: 30px;
+        line-height: 1.5;
+      }
+      .input-group-sm > .input-group-btn > .btn {
+        height: 30px;
+        padding: 5px 10px;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 3px;
+      }
+      select.input-sm,
+      .form-horizontal .form-group-sm select.form-control,
+      .input-group-sm > select.form-control,
+      .input-group-sm > select.input-group-addon,
+      .input-group-sm > .input-group-btn > select.btn {
+        height: 30px;
+        line-height: 30px;
+      }
+      textarea.input-sm,
+      .form-horizontal .form-group-sm textarea.form-control,
+      .input-group-sm > textarea.form-control,
+      .input-group-sm > textarea.input-group-addon,
+      .input-group-sm > .input-group-btn > textarea.btn,
+      select[multiple].input-sm,
+      .form-horizontal .form-group-sm select.form-control[multiple],
+      .input-group-sm > select.form-control[multiple],
+      .input-group-sm > select.input-group-addon[multiple],
+      .input-group-sm > .input-group-btn > select.btn[multiple] {
+        height: auto;
+      }
+      .input-lg,
+      .form-horizontal .form-group-lg .form-control,
+      .input-group-lg > .form-control {
+        height: 46px;
+        padding: 10px 16px;
+        font-size: 18px;
+        line-height: 1.33;
+        border-radius: 6px;
+      }
+      .input-group-lg > .input-group-addon {
+        height: 46px;
+        line-height: 1.33;
+      }
+      .input-group-lg > .input-group-btn > .btn {
+        height: 46px;
+        padding: 10px 16px;
+        font-size: 18px;
+        line-height: 1.33;
+        border-radius: 6px;
+      }
+      select.input-lg,
+      .form-horizontal .form-group-lg select.form-control,
+      .input-group-lg > select.form-control,
+      .input-group-lg > select.input-group-addon,
+      .input-group-lg > .input-group-btn > select.btn {
+        height: 46px;
+        line-height: 46px;
+      }
+      textarea.input-lg,
+      .form-horizontal .form-group-lg textarea.form-control,
+      .input-group-lg > textarea.form-control,
+      .input-group-lg > textarea.input-group-addon,
+      .input-group-lg > .input-group-btn > textarea.btn,
+      select[multiple].input-lg,
+      .form-horizontal .form-group-lg select.form-control[multiple],
+      .input-group-lg > select.form-control[multiple],
+      .input-group-lg > select.input-group-addon[multiple],
+      .input-group-lg > .input-group-btn > select.btn[multiple] {
+        height: auto;
+      }
+      .has-feedback {
+        position: relative;
+      }
+      .has-feedback .form-control {
+        padding-right: 42.5px;
+      }
+      .form-control-feedback {
+        position: absolute;
+        top: 25px;
+        right: 0;
+        z-index: 2;
+        display: block;
+        width: 34px;
+        height: 34px;
+        line-height: 34px;
+        text-align: center;
+      }
+      .input-lg + .form-control-feedback,
+      .form-horizontal .form-group-lg .form-control + .form-control-feedback,
+      .input-group-lg > .form-control + .form-control-feedback,
+      .input-group-lg > .input-group-addon + .form-control-feedback,
+      .input-group-lg > .input-group-btn > .btn + .form-control-feedback {
+        width: 46px;
+        height: 46px;
+        line-height: 46px;
+      }
+      .input-sm + .form-control-feedback,
+      .form-horizontal .form-group-sm .form-control + .form-control-feedback,
+      .input-group-sm > .form-control + .form-control-feedback,
+      .input-group-sm > .input-group-addon + .form-control-feedback,
+      .input-group-sm > .input-group-btn > .btn + .form-control-feedback {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+      }
+      .has-success .help-block,
+      .has-success .control-label,
+      .has-success .radio,
+      .has-success .checkbox,
+      .has-success .radio-inline,
+      .has-success .checkbox-inline {
+        color: #3c763d;
+      }
+      .has-success .form-control {
+        border-color: #3c763d;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      }
+      .has-success .form-control:focus {
+        border-color: #2b542c;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
+      }
+      .has-success .input-group-addon {
+        color: #3c763d;
+        border-color: #3c763d;
+        background-color: #dff0d8;
+      }
+      .has-success .form-control-feedback {
+        color: #3c763d;
+      }
+      .has-warning .help-block,
+      .has-warning .control-label,
+      .has-warning .radio,
+      .has-warning .checkbox,
+      .has-warning .radio-inline,
+      .has-warning .checkbox-inline {
+        color: #8a6d3b;
+      }
+      .has-warning .form-control {
+        border-color: #8a6d3b;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      }
+      .has-warning .form-control:focus {
+        border-color: #66512c;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
+      }
+      .has-warning .input-group-addon {
+        color: #8a6d3b;
+        border-color: #8a6d3b;
+        background-color: #fcf8e3;
+      }
+      .has-warning .form-control-feedback {
+        color: #8a6d3b;
+      }
+      .has-error .help-block,
+      .has-error .control-label,
+      .has-error .radio,
+      .has-error .checkbox,
+      .has-error .radio-inline,
+      .has-error .checkbox-inline {
+        color: #a94442;
+      }
+      .has-error .form-control {
+        border-color: #a94442;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      }
+      .has-error .form-control:focus {
+        border-color: #843534;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+      }
+      .has-error .input-group-addon {
+        color: #a94442;
+        border-color: #a94442;
+        background-color: #f2dede;
+      }
+      .has-error .form-control-feedback {
+        color: #a94442;
+      }
+      .has-feedback label.sr-only ~ .form-control-feedback {
+        top: 0;
+      }
+      .help-block {
+        display: block;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        color: #737373;
+      }
+      .form-horizontal .radio,
+      .form-horizontal .checkbox,
+      .form-horizontal .radio-inline,
+      .form-horizontal .checkbox-inline {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 7px;
+      }
+      .form-horizontal .radio,
+      .form-horizontal .checkbox {
+        min-height: 27px;
+      }
+      .form-horizontal .form-group {
+        margin-left: -15px;
+        margin-right: -15px;
+      }
+      .form-horizontal .form-group:before {
+        content: " ";
+        display: table;
+      }
+      .form-horizontal .form-group:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+      .form-horizontal .has-feedback .form-control-feedback {
+        top: 0;
+        right: 15px;
+      }
+      .btn {
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+        background-image: none;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      .btn:focus,
+      .btn:active:focus,
+      .btn.active:focus {
+        outline: thin dotted;
+        outline: 5px auto -webkit-focus-ring-color;
+        outline-offset: -2px;
+      }
+      .btn:hover,
+      .btn:focus {
+        color: #333;
+        text-decoration: none;
+      }
+      .btn:active,
+      .btn.active {
+        outline: 0;
+        background-image: none;
+        box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+      }
+      .btn.disabled,
+      .btn[disabled],
+      fieldset[disabled] .btn {
+        cursor: not-allowed;
+        pointer-events: none;
+        opacity: 0.65;
+        filter: alpha(opacity=65);
+        box-shadow: none;
+      }
+      .btn-default {
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;
+      }
+      .btn-default:hover,
+      .btn-default:focus,
+      .btn-default:active,
+      .btn-default.active,
+      .open > .btn-default.dropdown-toggle {
+        color: #333;
+        background-color: #e6e6e6;
+        border-color: #adadad;
+      }
+      .btn-default:active,
+      .btn-default.active,
+      .open > .btn-default.dropdown-toggle {
+        background-image: none;
+      }
+      .btn-default.disabled,
+      .btn-default.disabled:hover,
+      .btn-default.disabled:focus,
+      .btn-default.disabled:active,
+      .btn-default.disabled.active,
+      .btn-default[disabled],
+      .btn-default[disabled]:hover,
+      .btn-default[disabled]:focus,
+      .btn-default[disabled]:active,
+      .btn-default[disabled].active,
+      fieldset[disabled] .btn-default,
+      fieldset[disabled] .btn-default:hover,
+      fieldset[disabled] .btn-default:focus,
+      fieldset[disabled] .btn-default:active,
+      fieldset[disabled] .btn-default.active {
+        background-color: #fff;
+        border-color: #ccc;
+      }
+      .btn-default .badge {
+        color: #fff;
+        background-color: #333;
+      }
+      .btn-primary {
+        color: #fff;
+        background-color: #428bca;
+        border-color: #357ebd;
+      }
+      .btn-primary:hover,
+      .btn-primary:focus,
+      .btn-primary:active,
+      .btn-primary.active,
+      .open > .btn-primary.dropdown-toggle {
+        color: #fff;
+        background-color: #3071a9;
+        border-color: #285e8e;
+      }
+      .btn-primary:active,
+      .btn-primary.active,
+      .open > .btn-primary.dropdown-toggle {
+        background-image: none;
+      }
+      .btn-primary.disabled,
+      .btn-primary.disabled:hover,
+      .btn-primary.disabled:focus,
+      .btn-primary.disabled:active,
+      .btn-primary.disabled.active,
+      .btn-primary[disabled],
+      .btn-primary[disabled]:hover,
+      .btn-primary[disabled]:focus,
+      .btn-primary[disabled]:active,
+      .btn-primary[disabled].active,
+      fieldset[disabled] .btn-primary,
+      fieldset[disabled] .btn-primary:hover,
+      fieldset[disabled] .btn-primary:focus,
+      fieldset[disabled] .btn-primary:active,
+      fieldset[disabled] .btn-primary.active {
+        background-color: #428bca;
+        border-color: #357ebd;
+      }
+      .btn-primary .badge {
+        color: #428bca;
+        background-color: #fff;
+      }
+      .btn-success {
+        color: #fff;
+        background-color: #5cb85c;
+        border-color: #4cae4c;
+      }
+      .btn-success:hover,
+      .btn-success:focus,
+      .btn-success:active,
+      .btn-success.active,
+      .open > .btn-success.dropdown-toggle {
+        color: #fff;
+        background-color: #449d44;
+        border-color: #398439;
+      }
+      .btn-success:active,
+      .btn-success.active,
+      .open > .btn-success.dropdown-toggle {
+        background-image: none;
+      }
+      .btn-success.disabled,
+      .btn-success.disabled:hover,
+      .btn-success.disabled:focus,
+      .btn-success.disabled:active,
+      .btn-success.disabled.active,
+      .btn-success[disabled],
+      .btn-success[disabled]:hover,
+      .btn-success[disabled]:focus,
+      .btn-success[disabled]:active,
+      .btn-success[disabled].active,
+      fieldset[disabled] .btn-success,
+      fieldset[disabled] .btn-success:hover,
+      fieldset[disabled] .btn-success:focus,
+      fieldset[disabled] .btn-success:active,
+      fieldset[disabled] .btn-success.active {
+        background-color: #5cb85c;
+        border-color: #4cae4c;
+      }
+      .btn-success .badge {
+        color: #5cb85c;
+        background-color: #fff;
+      }
+      .btn-info {
+        color: #fff;
+        background-color: #5bc0de;
+        border-color: #46b8da;
+      }
+      .btn-info:hover,
+      .btn-info:focus,
+      .btn-info:active,
+      .btn-info.active,
+      .open > .btn-info.dropdown-toggle {
+        color: #fff;
+        background-color: #31b0d5;
+        border-color: #269abc;
+      }
+      .btn-info:active,
+      .btn-info.active,
+      .open > .btn-info.dropdown-toggle {
+        background-image: none;
+      }
+      .btn-info.disabled,
+      .btn-info.disabled:hover,
+      .btn-info.disabled:focus,
+      .btn-info.disabled:active,
+      .btn-info.disabled.active,
+      .btn-info[disabled],
+      .btn-info[disabled]:hover,
+      .btn-info[disabled]:focus,
+      .btn-info[disabled]:active,
+      .btn-info[disabled].active,
+      fieldset[disabled] .btn-info,
+      fieldset[disabled] .btn-info:hover,
+      fieldset[disabled] .btn-info:focus,
+      fieldset[disabled] .btn-info:active,
+      fieldset[disabled] .btn-info.active {
+        background-color: #5bc0de;
+        border-color: #46b8da;
+      }
+      .btn-info .badge {
+        color: #5bc0de;
+        background-color: #fff;
+      }
+      .btn-warning {
+        color: #fff;
+        background-color: #f0ad4e;
+        border-color: #eea236;
+      }
+      .btn-warning:hover,
+      .btn-warning:focus,
+      .btn-warning:active,
+      .btn-warning.active,
+      .open > .btn-warning.dropdown-toggle {
+        color: #fff;
+        background-color: #ec971f;
+        border-color: #d58512;
+      }
+      .btn-warning:active,
+      .btn-warning.active,
+      .open > .btn-warning.dropdown-toggle {
+        background-image: none;
+      }
+      .btn-warning.disabled,
+      .btn-warning.disabled:hover,
+      .btn-warning.disabled:focus,
+      .btn-warning.disabled:active,
+      .btn-warning.disabled.active,
+      .btn-warning[disabled],
+      .btn-warning[disabled]:hover,
+      .btn-warning[disabled]:focus,
+      .btn-warning[disabled]:active,
+      .btn-warning[disabled].active,
+      fieldset[disabled] .btn-warning,
+      fieldset[disabled] .btn-warning:hover,
+      fieldset[disabled] .btn-warning:focus,
+      fieldset[disabled] .btn-warning:active,
+      fieldset[disabled] .btn-warning.active {
+        background-color: #f0ad4e;
+        border-color: #eea236;
+      }
+      .btn-warning .badge {
+        color: #f0ad4e;
+        background-color: #fff;
+      }
+      .btn-danger {
+        color: #fff;
+        background-color: #d9534f;
+        border-color: #d43f3a;
+      }
+      .btn-danger:hover,
+      .btn-danger:focus,
+      .btn-danger:active,
+      .btn-danger.active,
+      .open > .btn-danger.dropdown-toggle {
+        color: #fff;
+        background-color: #c9302c;
+        border-color: #ac2925;
+      }
+      .btn-danger:active,
+      .btn-danger.active,
+      .open > .btn-danger.dropdown-toggle {
+        background-image: none;
+      }
+      .btn-danger.disabled,
+      .btn-danger.disabled:hover,
+      .btn-danger.disabled:focus,
+      .btn-danger.disabled:active,
+      .btn-danger.disabled.active,
+      .btn-danger[disabled],
+      .btn-danger[disabled]:hover,
+      .btn-danger[disabled]:focus,
+      .btn-danger[disabled]:active,
+      .btn-danger[disabled].active,
+      fieldset[disabled] .btn-danger,
+      fieldset[disabled] .btn-danger:hover,
+      fieldset[disabled] .btn-danger:focus,
+      fieldset[disabled] .btn-danger:active,
+      fieldset[disabled] .btn-danger.active {
+        background-color: #d9534f;
+        border-color: #d43f3a;
+      }
+      .btn-danger .badge {
+        color: #d9534f;
+        background-color: #fff;
+      }
+      .btn-link {
+        color: #428bca;
+        font-weight: 400;
+        cursor: pointer;
+        border-radius: 0;
+      }
+      .btn-link,
+      .btn-link:active,
+      .btn-link[disabled],
+      fieldset[disabled] .btn-link {
+        background-color: transparent;
+        box-shadow: none;
+      }
+      .btn-link,
+      .btn-link:hover,
+      .btn-link:focus,
+      .btn-link:active {
+        border-color: transparent;
+      }
+      .btn-link:hover,
+      .btn-link:focus {
+        color: #2a6496;
+        text-decoration: underline;
+        background-color: transparent;
+      }
+      .btn-link[disabled]:hover,
+      .btn-link[disabled]:focus,
+      fieldset[disabled] .btn-link:hover,
+      fieldset[disabled] .btn-link:focus {
+        color: #777;
+        text-decoration: none;
+      }
+      .btn-lg {
+        padding: 10px 16px;
+        font-size: 18px;
+        line-height: 1.33;
+        border-radius: 6px;
+      }
+      .btn-sm {
+        padding: 5px 10px;
+      }
+      .btn-sm,
+      .btn-xs {
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 3px;
+      }
+      .btn-xs {
+        padding: 1px 5px;
+      }
+      .btn-block {
+        display: block;
+        width: 100%;
+      }
+      .btn-block + .btn-block {
+        margin-top: 5px;
+      }
+      input[type="submit"].btn-block,
+      input[type="reset"].btn-block,
+      input[type="button"].btn-block {
+        width: 100%;
+      }
+      .fade {
+        opacity: 0;
+        transition: opacity 0.15s linear;
+      }
+      .fade.in {
+        opacity: 1;
+      }
+      .collapse {
+        display: none;
+      }
+      .collapse.in {
+        display: block;
+      }
+      tr.collapse.in {
+        display: table-row;
+      }
+      tbody.collapse.in {
+        display: table-row-group;
+      }
+      .collapsing {
+        position: relative;
+        height: 0;
+        overflow: hidden;
+        transition: height 0.35s ease;
+      }
+      .input-group {
+        position: relative;
+        display: table;
+        border-collapse: separate;
+      }
+      .input-group[class*="col-"] {
+        float: none;
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .input-group .form-control {
+        position: relative;
+        z-index: 2;
+        float: left;
+        width: 100%;
+        margin-bottom: 0;
+      }
+      .input-group-addon,
+      .input-group-btn,
+      .input-group .form-control {
+        display: table-cell;
+      }
+      .input-group-addon:not(:first-child):not(:last-child),
+      .input-group-btn:not(:first-child):not(:last-child),
+      .input-group .form-control:not(:first-child):not(:last-child) {
+        border-radius: 0;
+      }
+      .input-group-addon {
+        white-space: nowrap;
+      }
+      .input-group-addon,
+      .input-group-btn {
+        width: 1%;
+        vertical-align: middle;
+      }
+      .input-group-addon {
+        padding: 6px 12px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1;
+        color: #555;
+        text-align: center;
+        background-color: #eee;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .input-group-addon.input-sm,
+      .form-horizontal .form-group-sm .input-group-addon.form-control,
+      .input-group-sm > .input-group-addon,
+      .input-group-sm > .input-group-btn > .input-group-addon.btn {
+        padding: 5px 10px;
+        font-size: 12px;
+        border-radius: 3px;
+      }
+      .input-group-addon.input-lg,
+      .form-horizontal .form-group-lg .input-group-addon.form-control,
+      .input-group-lg > .input-group-addon,
+      .input-group-lg > .input-group-btn > .input-group-addon.btn {
+        padding: 10px 16px;
+        font-size: 18px;
+        border-radius: 6px;
+      }
+      .input-group-addon input[type="radio"],
+      .input-group-addon input[type="checkbox"] {
+        margin-top: 0;
+      }
+      .input-group .form-control:first-child,
+      .input-group-addon:first-child,
+      .input-group-btn:first-child > .btn,
+      .input-group-btn:first-child > .btn-group > .btn,
+      .input-group-btn:first-child > .dropdown-toggle,
+      .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+      .input-group-btn:last-child > .btn-group:not(:last-child) > .btn {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+      }
+      .input-group-addon:first-child {
+        border-right: 0;
+      }
+      .input-group .form-control:last-child,
+      .input-group-addon:last-child,
+      .input-group-btn:last-child > .btn,
+      .input-group-btn:last-child > .btn-group > .btn,
+      .input-group-btn:last-child > .dropdown-toggle,
+      .input-group-btn:first-child > .btn:not(:first-child),
+      .input-group-btn:first-child > .btn-group:not(:first-child) > .btn {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+      }
+      .input-group-addon:last-child {
+        border-left: 0;
+      }
+      .input-group-btn {
+        font-size: 0;
+        white-space: nowrap;
+      }
+      .input-group-btn,
+      .input-group-btn > .btn {
+        position: relative;
+      }
+      .input-group-btn > .btn + .btn {
+        margin-left: -1px;
+      }
+      .input-group-btn > .btn:hover,
+      .input-group-btn > .btn:focus,
+      .input-group-btn > .btn:active {
+        z-index: 2;
+      }
+      .input-group-btn:first-child > .btn,
+      .input-group-btn:first-child > .btn-group {
+        margin-right: -1px;
+      }
+      .input-group-btn:last-child > .btn,
+      .input-group-btn:last-child > .btn-group {
+        margin-left: -1px;
+      }
+      .pagination {
+        display: inline-block;
+        padding-left: 0;
+        margin: 20px 0;
+        border-radius: 4px;
+      }
+      .pagination > li {
+        display: inline;
+      }
+      .pagination > li > a,
+      .pagination > li > span {
+        position: relative;
+        float: left;
+        padding: 6px 12px;
+        line-height: 1.4285714;
+        text-decoration: none;
+        color: #428bca;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        margin-left: -1px;
+      }
+      .pagination > li:first-child > a,
+      .pagination > li:first-child > span {
+        margin-left: 0;
+        border-bottom-left-radius: 4px;
+        border-top-left-radius: 4px;
+      }
+      .pagination > li:last-child > a,
+      .pagination > li:last-child > span {
+        border-bottom-right-radius: 4px;
+        border-top-right-radius: 4px;
+      }
+      .pagination > li > a:hover,
+      .pagination > li > a:focus,
+      .pagination > li > span:hover,
+      .pagination > li > span:focus {
+        color: #2a6496;
+        background-color: #eee;
+        border-color: #ddd;
+      }
+      .pagination > .active > a,
+      .pagination > .active > a:hover,
+      .pagination > .active > a:focus,
+      .pagination > .active > span,
+      .pagination > .active > span:hover,
+      .pagination > .active > span:focus {
+        z-index: 2;
+        color: #fff;
+        background-color: #428bca;
+        border-color: #428bca;
+        cursor: default;
+      }
+      .pagination > .disabled > span,
+      .pagination > .disabled > span:hover,
+      .pagination > .disabled > span:focus,
+      .pagination > .disabled > a,
+      .pagination > .disabled > a:hover,
+      .pagination > .disabled > a:focus {
+        color: #777;
+        background-color: #fff;
+        border-color: #ddd;
+        cursor: not-allowed;
+      }
+      .pagination-lg > li > a,
+      .pagination-lg > li > span {
+        padding: 10px 16px;
+        font-size: 18px;
+      }
+      .pagination-lg > li:first-child > a,
+      .pagination-lg > li:first-child > span {
+        border-bottom-left-radius: 6px;
+        border-top-left-radius: 6px;
+      }
+      .pagination-lg > li:last-child > a,
+      .pagination-lg > li:last-child > span {
+        border-bottom-right-radius: 6px;
+        border-top-right-radius: 6px;
+      }
+      .pagination-sm > li > a,
+      .pagination-sm > li > span {
+        padding: 5px 10px;
+        font-size: 12px;
+      }
+      .pagination-sm > li:first-child > a,
+      .pagination-sm > li:first-child > span {
+        border-bottom-left-radius: 3px;
+        border-top-left-radius: 3px;
+      }
+      .pagination-sm > li:last-child > a,
+      .pagination-sm > li:last-child > span {
+        border-bottom-right-radius: 3px;
+        border-top-right-radius: 3px;
+      }
+      .close {
+        float: right;
+        font-size: 21px;
+        font-weight: 700;
+        line-height: 1;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        opacity: 0.2;
+        filter: alpha(opacity=20);
+      }
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+      }
+      button.close {
+        padding: 0;
+        cursor: pointer;
+        background: 0 0;
+        border: 0;
+        -webkit-appearance: none;
+      }
+      .modal-open,
+      .modal {
+        overflow: hidden;
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1050;
+        -webkit-overflow-scrolling: touch;
+        outline: 0;
+      }
+      .modal.fade .modal-dialog {
+        transform: translate3d(0, -25%, 0);
+        transition: transform 0.3s ease-out;
+      }
+      .modal.in .modal-dialog {
+        transform: translate3d(0, 0, 0);
+      }
+      .modal-open .modal {
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+      .modal-dialog {
+        position: relative;
+        width: auto;
+        margin: 10px;
+      }
+      .modal-content {
+        position: relative;
+        background-color: #fff;
+        border: 1px solid #999;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+        box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+        background-clip: padding-box;
+        outline: 0;
+      }
+      .modal-backdrop {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1040;
+        background-color: #000;
+      }
+      .modal-backdrop.fade {
+        opacity: 0;
+        filter: alpha(opacity=0);
+      }
+      .modal-backdrop.in {
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+      }
+      .modal-header {
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+        min-height: 16.4285714px;
+      }
+      .modal-header .close {
+        margin-top: -2px;
+      }
+      .modal-title {
+        margin: 0;
+        line-height: 1.4285714;
+      }
+      .modal-body {
+        position: relative;
+        padding: 15px;
+      }
+      .modal-footer {
+        padding: 15px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+      }
+      .modal-footer:before,
+      .modal-footer:after {
+        content: " ";
+        display: table;
+      }
+      .modal-footer:after {
+        clear: both;
+      }
+      .modal-footer .btn + .btn {
+        margin-left: 5px;
+        margin-bottom: 0;
+      }
+      .modal-footer .btn-group .btn + .btn {
+        margin-left: -1px;
+      }
+      .modal-footer .btn-block + .btn-block {
+        margin-left: 0;
+      }
+      .modal-scrollbar-measure {
+        position: absolute;
+        top: -9999px;
+        width: 50px;
+        height: 50px;
+        overflow: scroll;
+      }
+      .clearfix:before,
+      .clearfix:after {
+        content: " ";
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .center-block {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .pull-right {
+        float: right !important;
+      }
+      .pull-left {
+        float: left !important;
+      }
+      .hide {
+        display: none !important;
+      }
+      .show {
+        display: block !important;
+      }
+      .invisible {
+        visibility: hidden;
+      }
+      .text-hide {
+        font: 0/0 a;
+        color: transparent;
+        text-shadow: none;
+        background-color: transparent;
+        border: 0;
+      }
+      .hidden {
+        display: none !important;
+        visibility: hidden !important;
+      }
+      .affix {
+        position: fixed;
+        transform: translate3d(0, 0, 0);
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        background: #002b36;
+        color: #839496;
+        -webkit-text-size-adjust: none;
+      }
+      .hljs-comment,
+      .hljs-template_comment,
+      .diff .hljs-header,
+      .hljs-doctype,
+      .hljs-pi,
+      .lisp .hljs-string,
+      .hljs-javadoc {
+        color: #586e75;
+      }
+      .hljs-keyword,
+      .hljs-winutils,
+      .method,
+      .hljs-addition,
+      .css .hljs-tag,
+      .hljs-request,
+      .hljs-status,
+      .nginx .hljs-title {
+        color: #859900;
+      }
+      .hljs-number,
+      .hljs-command,
+      .hljs-string,
+      .hljs-tag .hljs-value,
+      .hljs-rules .hljs-value,
+      .hljs-phpdoc,
+      .hljs-dartdoc,
+      .tex .hljs-formula,
+      .hljs-regexp,
+      .hljs-hexcolor,
+      .hljs-link_url {
+        color: #2aa198;
+      }
+      .hljs-title,
+      .hljs-localvars,
+      .hljs-chunk,
+      .hljs-decorator,
+      .hljs-built_in,
+      .hljs-identifier,
+      .vhdl .hljs-literal,
+      .hljs-id,
+      .css .hljs-function {
+        color: #268bd2;
+      }
+      .hljs-attribute,
+      .hljs-variable,
+      .lisp .hljs-body,
+      .smalltalk .hljs-number,
+      .hljs-constant,
+      .hljs-class .hljs-title,
+      .hljs-parent,
+      .hljs-type,
+      .hljs-link_reference {
+        color: #b58900;
+      }
+      .hljs-preprocessor,
+      .hljs-preprocessor .hljs-keyword,
+      .hljs-pragma,
+      .hljs-shebang,
+      .hljs-symbol,
+      .hljs-symbol .hljs-string,
+      .diff .hljs-change,
+      .hljs-special,
+      .hljs-attr_selector,
+      .hljs-subst,
+      .hljs-cdata,
+      .css .hljs-pseudo,
+      .hljs-header {
+        color: #cb4b16;
+      }
+      .hljs-deletion,
+      .hljs-important {
+        color: #dc322f;
+      }
+      .hljs-link_label {
+        color: #6c71c4;
+      }
+      .tex .hljs-formula {
+        background: #073642;
+      }
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+      }
+      html {
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      audio,
+      canvas,
+      progress,
+      video {
+        display: inline-block;
+        vertical-align: baseline;
+      }
+      audio:not([controls]) {
+        display: none;
+        height: 0;
+      }
+      [hidden],
+      template {
+        display: none;
+      }
+      a {
+        background: 0 0;
+      }
+      a:active,
+      a:hover {
+        outline: 0;
+      }
+      abbr[title] {
+        border-bottom: 1px dotted;
+      }
+      b,
+      strong {
+        font-weight: 700;
+      }
+      dfn {
+        font-style: italic;
+      }
+      h1 {
+        margin: 0.67em 0;
+      }
+      mark {
+        background: #ff0;
+        color: #000;
+      }
+      small {
+        font-size: 80%;
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      images {
+        border: 0;
+      }
+      svg:not(:root) {
+        overflow: hidden;
+      }
+      figure {
+        margin: 1em 40px;
+      }
+      hr {
+        box-sizing: content-box;
+        height: 0;
+      }
+      pre {
+        overflow: auto;
+      }
+      code,
+      kbd {
+        font-size: 1em;
+      }
+      code,
+      kbd,
+      pre,
+      samp {
+        font-family: monospace, monospace;
+      }
+      samp {
+        font-size: 1em;
+      }
+      button,
+      input,
+      optgroup,
+      select,
+      textarea {
+        color: inherit;
+        font: inherit;
+        margin: 0;
+      }
+      button {
+        overflow: visible;
+      }
+      button,
+      select {
+        text-transform: none;
+      }
+      button,
+      html input[type="button"],
+      input[type="reset"],
+      input[type="submit"] {
+        -webkit-appearance: button;
+        cursor: pointer;
+      }
+      button[disabled],
+      html input[disabled] {
+        cursor: default;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+      }
+      input {
+        line-height: normal;
+      }
+      input[type="checkbox"],
+      input[type="radio"] {
+        box-sizing: border-box;
+        padding: 0;
+        margin-right: 5px;
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        height: auto;
+      }
+      input[type="search"] {
+        -webkit-appearance: textfield;
+        box-sizing: content-box;
+      }
+      input[type="search"]::-webkit-search-cancel-button,
+      input[type="search"]::-webkit-search-decoration {
+        -webkit-appearance: none;
+      }
+      fieldset {
+        border: 1px solid silver;
+        margin: 0 2px;
+        padding: 0.35em 0.625em 0.75em;
+      }
+      legend {
+        border: 0;
+        padding: 0;
+      }
+      textarea {
+        overflow: auto;
+      }
+      optgroup {
+        font-weight: 700;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      .debug {
+        background-color: #ffc0cb !important;
+      }
+      .ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .ir {
+        background-color: transparent;
+        border: 0;
+        overflow: hidden;
+      }
+      .ir::before {
+        content: "";
+        display: block;
+        height: 150%;
+        width: 0;
+      }
+      html {
+        font-size: 0.875em;
+        background: #fff;
+        color: #373d49;
+      }
+      html,
+      body {
+        font-family: Georgia, Cambria, serif;
+        height: 100%;
+      }
+      body {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 2rem;
+      }
+      ul,
+      ol {
+        margin-bottom: 0.83999rem;
+        padding-top: 0.16001rem;
+      }
+      li {
+        font-feature-settings: "kern" 1, "onum" 1, "liga" 1;
+        margin-left: 1rem;
+      }
+      li > ul,
+      li > ol {
+        margin-bottom: 0;
+      }
+      p {
+        padding-top: 0.66001rem;
+        font-feature-settings: "kern" 1, "onum" 1, "liga" 1;
+        margin-top: 0;
+      }
+      p,
+      pre {
+        margin-bottom: 1.33999rem;
+      }
+      pre {
+        font-size: 1rem;
+        padding: 0.66001rem 9.5px 9.5px;
+        line-height: 2rem;
+        background: linear-gradient(
+          to bottom,
+          #fff 0,
+          #fff 0.75rem,
+          #f5f7fa 0.75rem,
+          #f5f7fa 2.75rem,
+          #fff 2.75rem,
+          #fff 4rem
+        );
+        background-size: 100% 4rem;
+        border-color: #d3daea;
+      }
+      blockquote {
+        margin: 0;
+      }
+      blockquote p {
+        font-size: 1rem;
+        margin-bottom: 0.33999rem;
+        font-style: italic;
+        padding: 0.66001rem 1rem 1rem;
+        border-left: 3px solid #a0aabf;
+      }
+      th,
+      td {
+        padding: 12px;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial,
+          sans-serif;
+        font-feature-settings: "dlig" 1, "liga" 1, "lnum" 1, "kern" 1;
+        font-style: normal;
+        font-weight: 600;
+        margin-top: 0;
+      }
+      h1 {
+        line-height: 3rem;
+        font-size: 2.0571429rem;
+        margin-bottom: 0.21999rem;
+        padding-top: 0.78001rem;
+      }
+      h2 {
+        font-size: 1.953125rem;
+        margin-bottom: 0.1835837rem;
+        padding-top: 0.8164163rem;
+      }
+      h2,
+      h3 {
+        line-height: 3rem;
+      }
+      h3 {
+        font-size: 1.6457143rem;
+        margin-bottom: 0.07599rem;
+        padding-top: 0.92401rem;
+      }
+      h4 {
+        font-size: 1.5625rem;
+        margin-bottom: 0.546865rem;
+        padding-top: 0.453135rem;
+      }
+      h5 {
+        font-size: 1.25rem;
+        margin-bottom: -0.56251rem;
+        padding-top: 0.56251rem;
+      }
+      h6 {
+        font-size: 1rem;
+        margin-bottom: -0.65001rem;
+        padding-top: 0.65001rem;
+      }
+      a {
+        cursor: pointer;
+        color: #35d7bb;
+        text-decoration: none;
+      }
+      a:hover,
+      a:focus {
+        border-bottom-color: #35d7bb;
+        color: #dff9f4;
+      }
+      img {
+        height: auto;
+        max-width: 100%;
+      }
+      dt {
+        font-style: italic;
+        font-weight: 600;
+      }
+      .g {
+        display: block;
+      }
+      .g:after {
+        clear: both;
+        content: "";
+        display: table;
+      }
+      .g-b {
+        float: left;
+        margin: 0;
+        width: 100%;
+      }
+      .g {
+        margin-left: -16px;
+        margin-right: -16px;
+      }
+      .g-b {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      .g-b--center {
+        display: block;
+        float: none;
+        margin: 0 auto;
+      }
+      .g-b--right {
+        float: right;
+      }
+      .g-b--1of1 {
+        width: 100%;
+      }
+      .g-b--1of2,
+      .g-b--2of4,
+      .g-b--3of6,
+      .g-b--4of8,
+      .g-b--5of10,
+      .g-b--6of12 {
+        width: 50%;
+      }
+      .g-b--1of3,
+      .g-b--2of6,
+      .g-b--4of12 {
+        width: 33.333%;
+      }
+      .g-b--2of3,
+      .g-b--4of6,
+      .g-b--8of12 {
+        width: 66.666%;
+      }
+      .g-b--1of4,
+      .g-b--2of8,
+      .g-b--3of12 {
+        width: 25%;
+      }
+      .g-b--3of4,
+      .g-b--6of8,
+      .g-b--9of12 {
+        width: 75%;
+      }
+      .g-b--1of5,
+      .g-b--2of10 {
+        width: 20%;
+      }
+      .g-b--2of5,
+      .g-b--4of10 {
+        width: 40%;
+      }
+      .g-b--3of5,
+      .g-b--6of10 {
+        width: 60%;
+      }
+      .g-b--4of5,
+      .g-b--8of10 {
+        width: 80%;
+      }
+      .g-b--1of6,
+      .g-b--2of12 {
+        width: 16.666%;
+      }
+      .g-b--5of6,
+      .g-b--10of12 {
+        width: 83.333%;
+      }
+      .g-b--1of8 {
+        width: 12.5%;
+      }
+      .g-b--3of8 {
+        width: 37.5%;
+      }
+      .g-b--5of8 {
+        width: 62.5%;
+      }
+      .g-b--7of8 {
+        width: 87.5%;
+      }
+      .g-b--1of10 {
+        width: 10%;
+      }
+      .g-b--3of10 {
+        width: 30%;
+      }
+      .g-b--7of10 {
+        width: 70%;
+      }
+      .g-b--9of10 {
+        width: 90%;
+      }
+      .g-b--1of12 {
+        width: 8.333%;
+      }
+      .g-b--5of12 {
+        width: 41.666%;
+      }
+      .g-b--7of12 {
+        width: 58.333%;
+      }
+      .g-b--11of12 {
+        width: 91.666%;
+      }
+      .g-b--push--1of1 {
+        margin-left: 100%;
+      }
+      .g-b--push--1of2,
+      .g-b--push--2of4,
+      .g-b--push--3of6,
+      .g-b--push--4of8,
+      .g-b--push--5of10,
+      .g-b--push--6of12 {
+        margin-left: 50%;
+      }
+      .g-b--push--1of3,
+      .g-b--push--2of6,
+      .g-b--push--4of12 {
+        margin-left: 33.333%;
+      }
+      .g-b--push--2of3,
+      .g-b--push--4of6,
+      .g-b--push--8of12 {
+        margin-left: 66.666%;
+      }
+      .g-b--push--1of4,
+      .g-b--push--2of8,
+      .g-b--push--3of12 {
+        margin-left: 25%;
+      }
+      .g-b--push--3of4,
+      .g-b--push--6of8,
+      .g-b--push--9of12 {
+        margin-left: 75%;
+      }
+      .g-b--push--1of5,
+      .g-b--push--2of10 {
+        margin-left: 20%;
+      }
+      .g-b--push--2of5,
+      .g-b--push--4of10 {
+        margin-left: 40%;
+      }
+      .g-b--push--3of5,
+      .g-b--push--6of10 {
+        margin-left: 60%;
+      }
+      .g-b--push--4of5,
+      .g-b--push--8of10 {
+        margin-left: 80%;
+      }
+      .g-b--push--1of6,
+      .g-b--push--2of12 {
+        margin-left: 16.666%;
+      }
+      .g-b--push--5of6,
+      .g-b--push--10of12 {
+        margin-left: 83.333%;
+      }
+      .g-b--push--1of8 {
+        margin-left: 12.5%;
+      }
+      .g-b--push--3of8 {
+        margin-left: 37.5%;
+      }
+      .g-b--push--5of8 {
+        margin-left: 62.5%;
+      }
+      .g-b--push--7of8 {
+        margin-left: 87.5%;
+      }
+      .g-b--push--1of10 {
+        margin-left: 10%;
+      }
+      .g-b--push--3of10 {
+        margin-left: 30%;
+      }
+      .g-b--push--7of10 {
+        margin-left: 70%;
+      }
+      .g-b--push--9of10 {
+        margin-left: 90%;
+      }
+      .g-b--push--1of12 {
+        margin-left: 8.333%;
+      }
+      .g-b--push--5of12 {
+        margin-left: 41.666%;
+      }
+      .g-b--push--7of12 {
+        margin-left: 58.333%;
+      }
+      .g-b--push--11of12 {
+        margin-left: 91.666%;
+      }
+      .g-b--pull--1of1 {
+        margin-right: 100%;
+      }
+      .g-b--pull--1of2,
+      .g-b--pull--2of4,
+      .g-b--pull--3of6,
+      .g-b--pull--4of8,
+      .g-b--pull--5of10,
+      .g-b--pull--6of12 {
+        margin-right: 50%;
+      }
+      .g-b--pull--1of3,
+      .g-b--pull--2of6,
+      .g-b--pull--4of12 {
+        margin-right: 33.333%;
+      }
+      .g-b--pull--2of3,
+      .g-b--pull--4of6,
+      .g-b--pull--8of12 {
+        margin-right: 66.666%;
+      }
+      .g-b--pull--1of4,
+      .g-b--pull--2of8,
+      .g-b--pull--3of12 {
+        margin-right: 25%;
+      }
+      .g-b--pull--3of4,
+      .g-b--pull--6of8,
+      .g-b--pull--9of12 {
+        margin-right: 75%;
+      }
+      .g-b--pull--1of5,
+      .g-b--pull--2of10 {
+        margin-right: 20%;
+      }
+      .g-b--pull--2of5,
+      .g-b--pull--4of10 {
+        margin-right: 40%;
+      }
+      .g-b--pull--3of5,
+      .g-b--pull--6of10 {
+        margin-right: 60%;
+      }
+      .g-b--pull--4of5,
+      .g-b--pull--8of10 {
+        margin-right: 80%;
+      }
+      .g-b--pull--1of6,
+      .g-b--pull--2of12 {
+        margin-right: 16.666%;
+      }
+      .g-b--pull--5of6,
+      .g-b--pull--10of12 {
+        margin-right: 83.333%;
+      }
+      .g-b--pull--1of8 {
+        margin-right: 12.5%;
+      }
+      .g-b--pull--3of8 {
+        margin-right: 37.5%;
+      }
+      .g-b--pull--5of8 {
+        margin-right: 62.5%;
+      }
+      .g-b--pull--7of8 {
+        margin-right: 87.5%;
+      }
+      .g-b--pull--1of10 {
+        margin-right: 10%;
+      }
+      .g-b--pull--3of10 {
+        margin-right: 30%;
+      }
+      .g-b--pull--7of10 {
+        margin-right: 70%;
+      }
+      .g-b--pull--9of10 {
+        margin-right: 90%;
+      }
+      .g-b--pull--1of12 {
+        margin-right: 8.333%;
+      }
+      .g-b--pull--5of12 {
+        margin-right: 41.666%;
+      }
+      .g-b--pull--7of12 {
+        margin-right: 58.333%;
+      }
+      .g-b--pull--11of12 {
+        margin-right: 91.666%;
+      }
+      .splashscreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #373d49;
+        z-index: 22;
+      }
+      .splashscreen-dillinger {
+        width: 260px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        padding-bottom: 3rem;
+      }
+      .splashscreen p {
+        font-size: 1.25rem;
+        padding-top: 0.56251rem;
+        font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial,
+          sans-serif;
+        font-weight: 400;
+        text-align: center;
+        max-width: 500px;
+        margin: 0 auto;
+        color: #fff;
+      }
+      .sp-center {
+        position: relative;
+        transform: translateY(-50%);
+        top: 50%;
+      }
+      .open-menu > .wrapper {
+        overflow-x: hidden;
+      }
+      .page {
+        margin: 0 auto;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        transition: all 0.25s ease-in-out;
+        background-color: #fff;
+        padding-top: 51px;
+        will-change: left;
+      }
+      .open-menu .page {
+        left: 270px;
+      }
+      .title {
+        line-height: 1rem;
+        font-size: 0.8rem;
+        margin-bottom: 0.77999rem;
+        padding-top: 0.22001rem;
+        font-weight: 500;
+        color: #a0aabf;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding-left: 16px;
+        padding-right: 16px;
+        margin-top: 1rem;
+      }
+      .split-preview .title {
+        padding-left: 0;
+      }
+      .title-document {
+        line-height: 1rem;
+        font-size: 1.25rem;
+        margin-bottom: 0.89999rem;
+        padding-top: 0.10001rem;
+        font-weight: 400;
+        font-family: "Ubuntu Mono", Monaco;
+        color: #373d49;
+        padding-left: 16px;
+        padding-right: 16px;
+        width: 80%;
+        min-width: 300px;
+        outline: 0;
+        border: none;
+      }
+      .icon {
+        display: block;
+        margin: 0 auto;
+        width: 36px;
+        height: 36px;
+        border-radius: 3px;
+        text-align: center;
+      }
+      .icon svg {
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .icon-preview {
+        background-color: #373d49;
+        line-height: 40px;
+      }
+      .icon-preview svg {
+        width: 19px;
+        height: 12px;
+      }
+      .icon-settings {
+        background-color: #373d49;
+        line-height: 44px;
+      }
+      .icon-settings svg {
+        width: 18px;
+        height: 18px;
+      }
+      .icon-link {
+        width: 16px;
+        height: 16px;
+        line-height: 1;
+        margin-right: 24px;
+        text-align: right;
+      }
+      .navbar {
+        background-color: #373d49;
+        height: 51px;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 6;
+        transition: all 0.25s ease-in-out;
+        will-change: left;
+      }
+      .navbar:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      .open-menu .navbar {
+        left: 270px;
+      }
+      .navbar-brand {
+        float: left;
+        margin: 0 0 0 24px;
+        padding: 0;
+        line-height: 42px;
+      }
+      .navbar-brand svg {
+        width: 85px;
+        height: 11px;
+      }
+      .nav-left {
+        float: left;
+      }
+      .nav-right {
+        float: right;
+      }
+      .nav-sidebar {
+        width: 100%;
+      }
+      .menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .menu a {
+        border: 0;
+        color: #a0aabf;
+        font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial,
+          sans-serif;
+        outline: none;
+        text-transform: uppercase;
+      }
+      .menu a:hover {
+        color: #35d7bb;
+      }
+      .menu .menu-item {
+        border: 0;
+        display: none;
+        float: left;
+        margin: 0;
+        position: relative;
+      }
+      .menu .menu-item > a {
+        display: block;
+        font-size: 12px;
+        height: 51px;
+        letter-spacing: 1px;
+        line-height: 51px;
+        padding: 0 24px;
+      }
+      .menu .menu-item--settings,
+      .menu .menu-item--preview,
+      .menu .menu-item--save-to.in-sidebar,
+      .menu .menu-item--import-from.in-sidebar,
+      .menu .menu-item--link-unlink.in-sidebar,
+      .menu .menu-item--documents.in-sidebar {
+        display: block;
+      }
+      .menu .menu-item--documents {
+        padding-bottom: 1rem;
+      }
+      .menu .menu-item.open > a {
+        background-color: #1d212a;
+      }
+      .menu .menu-item-icon > a {
+        height: auto;
+        padding: 0;
+      }
+      .menu .menu-item-icon:hover > a {
+        background-color: transparent;
+      }
+      .menu .menu-link.open i {
+        background-color: #1d212a;
+      }
+      .menu .menu-link.open g {
+        fill: #35d7bb;
+      }
+      .menu .menu-link-preview,
+      .menu .menu-link-settings {
+        margin-top: 8px;
+        width: 51px;
+      }
+      .menu-sidebar {
+        width: 100%;
+      }
+      .menu-sidebar .menu-item {
+        float: none;
+        margin-bottom: 1px;
+        width: 100%;
+      }
+      .menu-sidebar .menu-item.open > a {
+        background-color: #373d49;
+      }
+      .menu-sidebar .open .caret {
+        transform: rotate(180deg);
+      }
+      .menu-sidebar > .menu-item:hover .dropdown a,
+      .menu-sidebar > .menu-item:hover .settings a {
+        background-color: transparent;
+      }
+      .menu-sidebar .menu-link {
+        background-color: #373d49;
+        font-weight: 600;
+      }
+      .menu-sidebar .menu-link:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      .menu-sidebar .menu-link > span {
+        float: left;
+      }
+      .menu-sidebar .menu-link > .caret {
+        float: right;
+        text-align: right;
+        top: 22px;
+      }
+      .menu-sidebar .dropdown,
+      .menu-sidebar .settings {
+        background-color: transparent;
+        position: static;
+        width: 100%;
+      }
+      .dropdown {
+        position: absolute;
+        right: 0;
+        top: 51px;
+        width: 188px;
+      }
+      .dropdown,
+      .settings {
+        display: none;
+        background-color: #1d212a;
+      }
+      .dropdown {
+        padding: 0;
+      }
+      .dropdown,
+      .settings,
+      .sidebar-list {
+        list-style: none;
+        margin: 0;
+      }
+      .sidebar-list {
+        padding: 0;
+      }
+      .dropdown li {
+        margin: 32px 0;
+        padding: 0 0 0 32px;
+      }
+      .dropdown li,
+      .settings li {
+        line-height: 1;
+      }
+      .sidebar-list li {
+        line-height: 1;
+        margin: 32px 0;
+        padding: 0 0 0 32px;
+      }
+      .dropdown a {
+        color: #d0d6e2;
+      }
+      .dropdown a,
+      .settings a,
+      .sidebar-list a {
+        display: block;
+        text-transform: none;
+      }
+      .sidebar-list a {
+        color: #d0d6e2;
+      }
+      .dropdown a:after,
+      .settings a:after,
+      .sidebar-list a:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      .dropdown .icon,
+      .settings .icon,
+      .sidebar-list .icon {
+        float: right;
+      }
+      .open .dropdown,
+      .open .settings,
+      .open .sidebar-list {
+        display: block;
+      }
+      .open .dropdown.collapse,
+      .open .collapse.settings,
+      .open .sidebar-list.collapse {
+        display: none;
+      }
+      .open .dropdown.collapse.in,
+      .open .collapse.in.settings,
+      .open .sidebar-list.collapse.in {
+        display: block;
+      }
+      .dropdown .unlinked .icon,
+      .settings .unlinked .icon,
+      .sidebar-list .unlinked .icon {
+        opacity: 0.3;
+      }
+      .dropdown.documents li,
+      .documents.settings li,
+      .sidebar-list.documents li {
+        background-image: url("../img/icons/file.svg");
+        background-position: 240px center;
+        background-repeat: no-repeat;
+        background-size: 14px 16px;
+        padding: 3px 32px;
+      }
+      .dropdown.documents li.octocat,
+      .documents.settings li.octocat,
+      .sidebar-list.documents li.octocat {
+        background-image: url("../img/icons/octocat.svg");
+        background-position: 234px center;
+        background-size: 24px 24px;
+      }
+      .dropdown.documents li:last-child,
+      .documents.settings li:last-child,
+      .sidebar-list.documents li:last-child {
+        margin-bottom: 1rem;
+      }
+      .dropdown.documents li.active a,
+      .documents.settings li.active a,
+      .sidebar-list.documents li.active a {
+        color: #35d7bb;
+      }
+      .settings {
+        position: fixed;
+        top: 67px;
+        right: 16px;
+        border-radius: 3px;
+        width: 288px;
+        background-color: #373d49;
+        padding: 16px;
+        z-index: 7;
+      }
+      .show-settings .settings {
+        display: block;
+      }
+      .settings .has-checkbox {
+        float: left;
+      }
+      .settings form {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+      }
+      .settings input {
+        width: 20%;
+      }
+      .settings a {
+        font-size: 1.25rem;
+        font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial,
+          sans-serif;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        line-height: 28px;
+        color: #d0d6e2;
+      }
+      .settings a:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      .settings a:hover {
+        color: #35d7bb;
+      }
+      .settings li {
+        border-bottom: 1px solid #4f535b;
+        margin: 0;
+        padding: 16px 0;
+      }
+      .settings li:last-child {
+        border-bottom: none;
+      }
+      .brand {
+        border: none;
+        display: block;
+      }
+      .brand:hover g {
+        fill: #35d7bb;
+      }
+      .toggle {
+        display: block;
+        float: left;
+        height: 16px;
+        padding: 25px 16px 26px;
+        width: 40px;
+      }
+      .toggle span:after,
+      .toggle span:before {
+        content: "";
+        left: 0;
+        position: absolute;
+        top: -6px;
+      }
+      .toggle span:after {
+        top: 6px;
+      }
+      .toggle span {
+        display: block;
+        position: relative;
+      }
+      .toggle span,
+      .toggle span:after,
+      .toggle span:before {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        background-color: #d3daea;
+        height: 2px;
+        transition: all 0.3s;
+        width: 20px;
+      }
+      .open-menu .toggle span {
+        background-color: transparent;
+      }
+      .open-menu .toggle span:before {
+        transform: rotate(45deg) translate(3px, 3px);
+      }
+      .open-menu .toggle span:after {
+        transform: rotate(-45deg) translate(5px, -6px);
+      }
+      .caret {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin-left: 6px;
+        vertical-align: middle;
+        position: relative;
+        top: -1px;
+        border-top: 4px solid;
+        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
+      }
+      .sidebar {
+        overflow: auto;
+        height: 100%;
+        padding-right: 15px;
+        padding-bottom: 15px;
+        width: 285px;
+      }
+      .sidebar-wrapper {
+        -webkit-overflow-scrolling: touch;
+        background-color: #2b2f36;
+        left: 0;
+        height: 100%;
+        overflow-y: hidden;
+        position: fixed;
+        top: 0;
+        width: 285px;
+        z-index: 1;
+      }
+      .sidebar-branding {
+        width: 160px;
+        padding: 0;
+        margin: 16px auto;
+      }
+      .header {
+        border-bottom: 1px solid #e8e8e8;
+        position: relative;
+      }
+      .words,
+      .characters {
+        line-height: 1rem;
+        font-size: 0.8rem;
+        margin-bottom: 0.77999rem;
+        padding-top: 0.22001rem;
+        font-weight: 500;
+        font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial,
+          sans-serif;
+        color: #a0aabf;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        z-index: 5;
+        position: absolute;
+        right: 16px;
+        top: 0;
+      }
+      .words span,
+      .characters span {
+        color: #000;
+      }
+      .words + .characters {
+        top: 22px;
+      }
+      .btn {
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial,
+          sans-serif;
+        font-size: 14px;
+        text-shadow: 0 1px 0 #1b8b77;
+        padding: 16px 24px;
+        background-color: #35d7bb;
+        border-radius: 3px;
+        margin: 0 auto 16px;
+        line-height: 1;
+        color: #fff;
+        transition: all 0.15s linear;
+        -webkit-font-smoothing: antialiased;
+      }
+      .btn--new,
+      .btn--save {
+        display: block;
+        width: 238px;
+      }
+      .btn--new:hover,
+      .btn--new:focus,
+      .btn--save:hover,
+      .btn--save:focus {
+        color: #fff;
+        border-bottom-color: transparent;
+        box-shadow: 0 1px 3px #24b59c;
+        text-shadow: 0 1px 0 #24b59c;
+      }
+      .btn--save {
+        background-color: #4a5261;
+        text-shadow: 0 1px 1px #1e2127;
+      }
+      .btn--save:hover,
+      .btn--save:focus {
+        color: #fff;
+        border-bottom-color: transparent;
+        box-shadow: 0 1px 5px #08090a;
+        text-shadow: none;
+      }
+      .btn--delete {
+        display: block;
+        width: 238px;
+        background-color: transparent;
+        font-size: 12px;
+        text-shadow: none;
+      }
+      .btn--delete:hover,
+      .btn--delete:focus {
+        color: #fff;
+        border-bottom-color: transparent;
+        text-shadow: 0 1px 0 #08090a;
+        opacity: 0.8;
+      }
+      .btn--delete-modal,
+      .btn--ok,
+      .btn--close {
+        border-top: 0;
+        background-color: #4a5261;
+        text-shadow: 0 1px 0 #08090a;
+        margin: 0;
+      }
+      .btn--delete-modal:hover,
+      .btn--delete-modal:focus,
+      .btn--ok:hover,
+      .btn--ok:focus,
+      .btn--close:hover,
+      .btn--close:focus {
+        color: #fff;
+        background-color: #292d36;
+        text-shadow: none;
+      }
+      .btn--delete-modal {
+        display: inline;
+        width: auto;
+      }
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(55, 61, 73, 0.8);
+        transition: all 0.25s ease-in-out;
+        transition-timing-function: ease-out;
+        will-change: left, opacity, visibility;
+        z-index: 5;
+        opacity: 0;
+        visibility: hidden;
+      }
+      .show-settings .overlay {
+        visibility: visible;
+        opacity: 1;
+      }
+      .switch {
+        float: right;
+        line-height: 1;
+      }
+      .switch input {
+        display: none;
+      }
+      .switch small {
+        display: inline-block;
+        cursor: pointer;
+        padding: 0 24px 0 0;
+        transition: all ease 0.2s;
+        background-color: #2b2f36;
+        border-color: #2b2f36;
+      }
+      .switch small,
+      .switch small:before {
+        border-radius: 30px;
+        box-shadow: inset 0 0 2px 0 #14171f;
+      }
+      .switch small:before {
+        display: block;
+        content: "";
+        width: 28px;
+        height: 28px;
+        background: #fff;
+      }
+      .switch.checked small {
+        padding-right: 0;
+        padding-left: 24px;
+        background-color: #35d7bb;
+        box-shadow: none;
+      }
+      .modal--dillinger.about .modal-dialog {
+        font-size: 1.25rem;
+        max-width: 500px;
+      }
+      .modal--dillinger.scope .modal-dialog {
+        max-width: 300px;
+        margin: 5rem auto;
+      }
+      .modal--dillinger .modal-dialog {
+        max-width: 600px;
+        width: auto;
+        margin: 5rem auto;
+      }
+      .modal--dillinger .modal-content {
+        background: #373d49;
+        border-radius: 3px;
+        box-shadow: 0 2px 5px 0 #2c3b59;
+        color: #fff;
+        font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial,
+          sans-serif;
+        font-weight: 400;
+        padding: 2rem;
+      }
+      .modal--dillinger ul {
+        list-style-type: disc;
+        margin: 1rem 0;
+        padding: 0 0 0 1rem;
+      }
+      .modal--dillinger li {
+        padding: 0;
+        margin: 0;
+      }
+      .modal--dillinger .modal-header {
+        border: 0;
+        padding: 0;
+      }
+      .modal--dillinger .modal-body {
+        padding: 0;
+      }
+      .modal--dillinger .modal-footer {
+        border: 0;
+        padding: 0;
+      }
+      .modal--dillinger .close {
+        color: #fff;
+        opacity: 1;
+      }
+      .modal-backdrop {
+        background-color: #373d49;
+      }
+      .pagination--dillinger {
+        padding: 0 !important;
+        margin: 1.5rem 0 !important;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-line-pack: stretch;
+        align-content: stretch;
+      }
+      .pagination--dillinger li {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        text-align: center;
+      }
+      .pagination--dillinger li:first-child > a,
+      .pagination--dillinger li.disabled > a,
+      .pagination--dillinger li.disabled > a:hover,
+      .pagination--dillinger li.disabled > a:focus,
+      .pagination--dillinger li > a {
+        background-color: transparent;
+        border-color: #4f535b;
+        border-right-color: transparent;
+      }
+      .pagination--dillinger li.active > a,
+      .pagination--dillinger li.active > a:hover,
+      .pagination--dillinger li.active > a:focus {
+        border-color: #4a5261;
+        background-color: #4a5261;
+        color: #fff;
+      }
+      .pagination--dillinger li > a {
+        float: none;
+        color: #fff;
+        width: 100%;
+        display: block;
+        text-align: center;
+        margin: 0;
+        border-right-color: transparent;
+        padding: 6px;
+      }
+      .pagination--dillinger li > a:hover,
+      .pagination--dillinger li > a:focus {
+        border-color: #35d7bb;
+        background-color: #35d7bb;
+        color: #fff;
+      }
+      .pagination--dillinger li:last-child a {
+        border-color: #4f535b;
+      }
+      .pagination--dillinger li:first-child a {
+        border-right-color: transparent;
+      }
+      .diNotify {
+        position: absolute;
+        z-index: 9999;
+        left: 0;
+        right: 0;
+        top: 0;
+        margin: 0 auto;
+        max-width: 400px;
+        text-align: center;
+        transition: top 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        visibility: hidden;
+      }
+      .diNotify-body {
+        -webkit-font-smoothing: antialiased;
+        background-color: #35d7bb;
+        background: #666e7f;
+        border-radius: 3px;
+        color: #fff;
+        font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial,
+          sans-serif;
+        font-weight: 400;
+        overflow: hidden;
+        padding: 1rem 2rem 0.5rem;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: baseline;
+        align-items: baseline;
+        -ms-flex-pack: center;
+        justify-content: center;
+      }
+      .diNotify-icon {
+        display: block;
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        position: relative;
+        top: 3px;
+      }
+      .diNotify-message {
+        padding-left: 1rem;
+      }
+      .zen-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        background-color: #fff;
+        opacity: 0;
+        transition: opacity 0.25s ease-in-out;
+      }
+      .zen-wrapper.on {
+        opacity: 1;
+      }
+      .enter-zen-mode {
+        background-image: url("../img/icons/enter-zen.svg");
+        right: 0.5rem;
+        top: 0.313rem;
+        display: none;
+      }
+      .enter-zen-mode,
+      .close-zen-mode {
+        font: 0/0 a;
+        color: transparent;
+        text-shadow: none;
+        background-color: transparent;
+        border: 0;
+        background-repeat: no-repeat;
+        width: 32px;
+        height: 32px;
+        display: block;
+        position: absolute;
+      }
+      .close-zen-mode {
+        background-image: url("../img/icons/exit-zen.svg");
+        right: 1rem;
+        top: 1rem;
+      }
+      .zen-page {
+        position: relative;
+        top: 0;
+        bottom: 0;
+        z-index: 11;
+        height: 100%;
+        width: 100%;
+      }
+      #zen {
+        font-size: 1.25rem;
+        width: 300px;
+        height: 80%;
+        margin: 0 auto;
+        position: relative;
+        top: 10%;
+      }
+      #zen:before,
+      #zen:after {
+        content: "";
+        position: absolute;
+        height: 10%;
+        width: 100%;
+        z-index: 12;
+        pointer-events: none;
+      }
+      #preview .table {
+        width: auto;
+      }
+      .ui-resizable {
+        position: relative;
+      }
+      .ui-resizable-handle {
+        position: absolute;
+        font-size: 0.1px;
+        z-index: 99999;
+        display: block;
+      }
+      .ui-resizable-e {
+        background-color: #666;
+        border-right: 8px solid #e8e8e8;
+        border-left: 1px solid #222;
+        width: 10px;
+        z-index: 88 !important;
+        position: relative;
+      }
+      .ui-resizable-e:after {
+        content: "-";
+        display: block;
+        position: absolute;
+        top: calc(50% - 16px);
+        left: 0;
+        height: 25px;
+        width: 2px;
+        background-color: rgba(0, 0, 0, 0.4);
+        margin: 3px;
+      }
+      #editor {
+        cursor: ew-resize;
+        position: relative;
+        z-index: auto;
+      }
+      .profile-pic {
+        float: left;
+        width: 250px;
+      }
+      #_default_ a::before {
+        color: #a0aabf;
+      }
+      #_default_ img {
+        display: none;
+      }
+      #_default_ #_default_ {
+        display: block;
+        float: left;
+        max-width: 38%;
+        word-wrap: break-word;
+      }
+      #_default_ .default-ad {
+        display: none;
+      }
+      #_default_ ._default_ {
+        display: block;
+      }
+      #_default_ a {
+        color: #35d7bb;
+        text-decoration: none;
+      }
+      #_default_ a:hover {
+        color: #8ae8d8;
+      }
+      #_default_ .default-image {
+        display: none;
+      }
+      #_default_ .default-title:after {
+        content: " — ";
+      }
+      #_default_ .default-title,
+      #_default_ .default-text,
+      #_default_ .default-description {
+        display: inline;
+      }
+      #_default_ .default-title {
+        position: relative;
+        font-weight: 600;
+        display: none;
+      }
+      #_default_ a:before {
+        position: relative;
+        top: 0;
+        padding: 5px;
+        color: #a0aabf;
+        content: "Ad";
+        text-transform: uppercase;
+        font-size: 8px;
+        font-family: Verdana, sans-serif;
+      }
+      #_default_ {
+        display: block;
+        float: left;
+        max-width: 38%;
+        word-wrap: break-word;
+      }
+      #_default_ ._default_ {
+        display: block;
+        font-size: 0.75rem;
+        height: 51px;
+        letter-spacing: 1px;
+        line-height: 1rem;
+        padding: 18px 24px;
+      }
+      body {
+        max-width: 1024px;
+        margin: 0 auto;
+        overflow: auto;
+        padding: 2%;
+      }
+      .split {
+        overflow: scroll;
+        padding: 0 !important;
+        -webkit-overflow-scrolling: touch;
+      }
+      .split-editor {
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        z-index: 3;
+      }
+      .show-preview .split-editor {
+        display: none;
+      }
+      .split-preview {
+        background-color: #fff;
+        display: none;
+        top: 0;
+        position: relative;
+        z-index: 4;
+      }
+      .show-preview .split-preview {
+        display: block;
+      }
+      #editor {
+        font-size: 1rem;
+        font-family: "Ubuntu Mono", Monaco;
+        font-weight: 400;
+        line-height: 2rem;
+        width: 100%;
+        height: 100%;
+      }
+      #editor .ace_gutter {
+        -webkit-font-smoothing: antialiased;
+      }
+      .editor-header {
+        width: 50%;
+        float: left;
+        border-bottom: 1px solid #e8e8e8;
+        position: relative;
+      }
+      .editor-header--first {
+        border-right: 1px solid #e8e8e8;
+      }
+      .editor-header .title {
+        display: inline-block;
+      }
+      .preview-html {
+        padding: 15px;
+      }
+      .preview-html a {
+        color: #a0aabf;
+        text-decoration: underline;
+      }
+      .preview-src {
+        white-space: normal;
+      }
+      .preview-mode-toggle-src {
+        background-image: url("../img/icons/code.svg");
+      }
+      .preview-mode-toggle-src,
+      .preview-mode-toggle-html {
+        font: 0/0 a;
+        color: transparent;
+        text-shadow: none;
+        background-color: transparent;
+        border: 0;
+        background-repeat: no-repeat;
+        width: 32px;
+        height: 32px;
+        display: block;
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+        display: none;
+      }
+      .preview-mode-toggle-html {
+        background-image: url("../img/icons/eye.svg");
+      }
+      .sr-only {
+        visibility: hidden;
+        text-overflow: 110%;
+        overflow: hidden;
+        top: -100px;
+        position: absolute;
+      }
+      .mnone {
+        margin: 0 !important;
+      }
+      @media screen and (min-width: 27.5em) {
+        html {
+          font-size: 0.875em;
+        }
+        body {
+          font-size: 1rem;
+        }
+        ul,
+        ol {
+          margin-bottom: 0.83999rem;
+          padding-top: 0.16001rem;
+        }
+        p {
+          padding-top: 0.66001rem;
+        }
+        p,
+        pre {
+          margin-bottom: 1.33999rem;
+        }
+        pre,
+        blockquote p {
+          font-size: 1rem;
+          padding-top: 0.66001rem;
+        }
+        blockquote p {
+          margin-bottom: 0.33999rem;
+        }
+        h1 {
+          font-size: 2.0571429rem;
+          margin-bottom: 0.21999rem;
+          padding-top: 0.78001rem;
+        }
+        h2 {
+          font-size: 1.953125rem;
+          margin-bottom: 0.1835837rem;
+          padding-top: 0.8164163rem;
+        }
+        h3 {
+          font-size: 1.6457143rem;
+          margin-bottom: 0.07599rem;
+          padding-top: 0.92401rem;
+        }
+        h4 {
+          font-size: 1.5625rem;
+          margin-bottom: 0.546865rem;
+          padding-top: 0.453135rem;
+        }
+        h5 {
+          font-size: 1.25rem;
+          margin-bottom: -0.56251rem;
+          padding-top: 0.56251rem;
+        }
+        h6 {
+          font-size: 1rem;
+          margin-bottom: -0.65001rem;
+          padding-top: 0.65001rem;
+        }
+        .g {
+          margin-left: -16px;
+          margin-right: -16px;
+        }
+        .g-b {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+        .g-b--m1of1 {
+          width: 100%;
+        }
+        .g-b--m1of2,
+        .g-b--m2of4,
+        .g-b--m3of6,
+        .g-b--m4of8,
+        .g-b--m5of10,
+        .g-b--m6of12 {
+          width: 50%;
+        }
+        .g-b--m1of3,
+        .g-b--m2of6,
+        .g-b--m4of12 {
+          width: 33.333%;
+        }
+        .g-b--m2of3,
+        .g-b--m4of6,
+        .g-b--m8of12 {
+          width: 66.666%;
+        }
+        .g-b--m1of4,
+        .g-b--m2of8,
+        .g-b--m3of12 {
+          width: 25%;
+        }
+        .g-b--m3of4,
+        .g-b--m6of8,
+        .g-b--m9of12 {
+          width: 75%;
+        }
+        .g-b--m1of5,
+        .g-b--m2of10 {
+          width: 20%;
+        }
+        .g-b--m2of5,
+        .g-b--m4of10 {
+          width: 40%;
+        }
+        .g-b--m3of5,
+        .g-b--m6of10 {
+          width: 60%;
+        }
+        .g-b--m4of5,
+        .g-b--m8of10 {
+          width: 80%;
+        }
+        .g-b--m1of6,
+        .g-b--m2of12 {
+          width: 16.666%;
+        }
+        .g-b--m5of6,
+        .g-b--m10of12 {
+          width: 83.333%;
+        }
+        .g-b--m1of8 {
+          width: 12.5%;
+        }
+        .g-b--m3of8 {
+          width: 37.5%;
+        }
+        .g-b--m5of8 {
+          width: 62.5%;
+        }
+        .g-b--m7of8 {
+          width: 87.5%;
+        }
+        .g-b--m1of10 {
+          width: 10%;
+        }
+        .g-b--m3of10 {
+          width: 30%;
+        }
+        .g-b--m7of10 {
+          width: 70%;
+        }
+        .g-b--m9of10 {
+          width: 90%;
+        }
+        .g-b--m1of12 {
+          width: 8.333%;
+        }
+        .g-b--m5of12 {
+          width: 41.666%;
+        }
+        .g-b--m7of12 {
+          width: 58.333%;
+        }
+        .g-b--m11of12 {
+          width: 91.666%;
+        }
+        .g-b--push--m1of1 {
+          margin-left: 100%;
+        }
+        .g-b--push--m1of2,
+        .g-b--push--m2of4,
+        .g-b--push--m3of6,
+        .g-b--push--m4of8,
+        .g-b--push--m5of10,
+        .g-b--push--m6of12 {
+          margin-left: 50%;
+        }
+        .g-b--push--m1of3,
+        .g-b--push--m2of6,
+        .g-b--push--m4of12 {
+          margin-left: 33.333%;
+        }
+        .g-b--push--m2of3,
+        .g-b--push--m4of6,
+        .g-b--push--m8of12 {
+          margin-left: 66.666%;
+        }
+        .g-b--push--m1of4,
+        .g-b--push--m2of8,
+        .g-b--push--m3of12 {
+          margin-left: 25%;
+        }
+        .g-b--push--m3of4,
+        .g-b--push--m6of8,
+        .g-b--push--m9of12 {
+          margin-left: 75%;
+        }
+        .g-b--push--m1of5,
+        .g-b--push--m2of10 {
+          margin-left: 20%;
+        }
+        .g-b--push--m2of5,
+        .g-b--push--m4of10 {
+          margin-left: 40%;
+        }
+        .g-b--push--m3of5,
+        .g-b--push--m6of10 {
+          margin-left: 60%;
+        }
+        .g-b--push--m4of5,
+        .g-b--push--m8of10 {
+          margin-left: 80%;
+        }
+        .g-b--push--m1of6,
+        .g-b--push--m2of12 {
+          margin-left: 16.666%;
+        }
+        .g-b--push--m5of6,
+        .g-b--push--m10of12 {
+          margin-left: 83.333%;
+        }
+        .g-b--push--m1of8 {
+          margin-left: 12.5%;
+        }
+        .g-b--push--m3of8 {
+          margin-left: 37.5%;
+        }
+        .g-b--push--m5of8 {
+          margin-left: 62.5%;
+        }
+        .g-b--push--m7of8 {
+          margin-left: 87.5%;
+        }
+        .g-b--push--m1of10 {
+          margin-left: 10%;
+        }
+        .g-b--push--m3of10 {
+          margin-left: 30%;
+        }
+        .g-b--push--m7of10 {
+          margin-left: 70%;
+        }
+        .g-b--push--m9of10 {
+          margin-left: 90%;
+        }
+        .g-b--push--m1of12 {
+          margin-left: 8.333%;
+        }
+        .g-b--push--m5of12 {
+          margin-left: 41.666%;
+        }
+        .g-b--push--m7of12 {
+          margin-left: 58.333%;
+        }
+        .g-b--push--m11of12 {
+          margin-left: 91.666%;
+        }
+        .g-b--pull--m1of1 {
+          margin-right: 100%;
+        }
+        .g-b--pull--m1of2,
+        .g-b--pull--m2of4,
+        .g-b--pull--m3of6,
+        .g-b--pull--m4of8,
+        .g-b--pull--m5of10,
+        .g-b--pull--m6of12 {
+          margin-right: 50%;
+        }
+        .g-b--pull--m1of3,
+        .g-b--pull--m2of6,
+        .g-b--pull--m4of12 {
+          margin-right: 33.333%;
+        }
+        .g-b--pull--m2of3,
+        .g-b--pull--m4of6,
+        .g-b--pull--m8of12 {
+          margin-right: 66.666%;
+        }
+        .g-b--pull--m1of4,
+        .g-b--pull--m2of8,
+        .g-b--pull--m3of12 {
+          margin-right: 25%;
+        }
+        .g-b--pull--m3of4,
+        .g-b--pull--m6of8,
+        .g-b--pull--m9of12 {
+          margin-right: 75%;
+        }
+        .g-b--pull--m1of5,
+        .g-b--pull--m2of10 {
+          margin-right: 20%;
+        }
+        .g-b--pull--m2of5,
+        .g-b--pull--m4of10 {
+          margin-right: 40%;
+        }
+        .g-b--pull--m3of5,
+        .g-b--pull--m6of10 {
+          margin-right: 60%;
+        }
+        .g-b--pull--m4of5,
+        .g-b--pull--m8of10 {
+          margin-right: 80%;
+        }
+        .g-b--pull--m1of6,
+        .g-b--pull--m2of12 {
+          margin-right: 16.666%;
+        }
+        .g-b--pull--m5of6,
+        .g-b--pull--m10of12 {
+          margin-right: 83.333%;
+        }
+        .g-b--pull--m1of8 {
+          margin-right: 12.5%;
+        }
+        .g-b--pull--m3of8 {
+          margin-right: 37.5%;
+        }
+        .g-b--pull--m5of8 {
+          margin-right: 62.5%;
+        }
+        .g-b--pull--m7of8 {
+          margin-right: 87.5%;
+        }
+        .g-b--pull--m1of10 {
+          margin-right: 10%;
+        }
+        .g-b--pull--m3of10 {
+          margin-right: 30%;
+        }
+        .g-b--pull--m7of10 {
+          margin-right: 70%;
+        }
+        .g-b--pull--m9of10 {
+          margin-right: 90%;
+        }
+        .g-b--pull--m1of12 {
+          margin-right: 8.333%;
+        }
+        .g-b--pull--m5of12 {
+          margin-right: 41.666%;
+        }
+        .g-b--pull--m7of12 {
+          margin-right: 58.333%;
+        }
+        .g-b--pull--m11of12 {
+          margin-right: 91.666%;
+        }
+        .splashscreen p {
+          font-size: 1.25rem;
+          margin-bottom: 1.43749rem;
+          padding-top: 0.56251rem;
+        }
+        .title {
+          font-size: 0.8rem;
+          margin-bottom: 0.77999rem;
+          padding-top: 0.22001rem;
+        }
+        .title-document {
+          margin-bottom: 0.89999rem;
+          padding-top: 0.10001rem;
+        }
+        .title-document,
+        .settings a {
+          font-size: 1.25rem;
+        }
+        .words,
+        .characters {
+          font-size: 0.8rem;
+          margin-bottom: 0.77999rem;
+          padding-top: 0.22001rem;
+        }
+        .modal--dillinger.about .modal-dialog,
+        #zen {
+          font-size: 1.25rem;
+        }
+        #zen {
+          width: 400px;
+        }
+        #editor {
+          font-size: 1rem;
+        }
+      }
+      @media screen and (min-width: 46.25em) {
+        html {
+          font-size: 0.875em;
+        }
+        body {
+          font-size: 1rem;
+        }
+        ul,
+        ol {
+          margin-bottom: 0.83999rem;
+          padding-top: 0.16001rem;
+        }
+        p {
+          padding-top: 0.66001rem;
+        }
+        p,
+        pre {
+          margin-bottom: 1.33999rem;
+        }
+        pre,
+        blockquote p {
+          font-size: 1rem;
+          padding-top: 0.66001rem;
+        }
+        blockquote p {
+          margin-bottom: 0.33999rem;
+        }
+        h1 {
+          font-size: 2.0571429rem;
+          margin-bottom: 0.21999rem;
+          padding-top: 0.78001rem;
+        }
+        h2 {
+          font-size: 1.953125rem;
+          margin-bottom: 0.1835837rem;
+          padding-top: 0.8164163rem;
+        }
+        h3 {
+          font-size: 1.6457143rem;
+          margin-bottom: 0.07599rem;
+          padding-top: 0.92401rem;
+        }
+        h4 {
+          font-size: 1.5625rem;
+          margin-bottom: 0.546865rem;
+          padding-top: 0.453135rem;
+        }
+        h5 {
+          font-size: 1.25rem;
+          margin-bottom: -0.56251rem;
+          padding-top: 0.56251rem;
+        }
+        h6 {
+          font-size: 1rem;
+          margin-bottom: -0.65001rem;
+          padding-top: 0.65001rem;
+        }
+        .g {
+          margin-left: -16px;
+          margin-right: -16px;
+        }
+        .g-b {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+        .g-b--t1of1 {
+          width: 100%;
+        }
+        .g-b--t1of2,
+        .g-b--t2of4,
+        .g-b--t3of6,
+        .g-b--t4of8,
+        .g-b--t5of10,
+        .g-b--t6of12 {
+          width: 50%;
+        }
+        .g-b--t1of3,
+        .g-b--t2of6,
+        .g-b--t4of12 {
+          width: 33.333%;
+        }
+        .g-b--t2of3,
+        .g-b--t4of6,
+        .g-b--t8of12 {
+          width: 66.666%;
+        }
+        .g-b--t1of4,
+        .g-b--t2of8,
+        .g-b--t3of12 {
+          width: 25%;
+        }
+        .g-b--t3of4,
+        .g-b--t6of8,
+        .g-b--t9of12 {
+          width: 75%;
+        }
+        .g-b--t1of5,
+        .g-b--t2of10 {
+          width: 20%;
+        }
+        .g-b--t2of5,
+        .g-b--t4of10 {
+          width: 40%;
+        }
+        .g-b--t3of5,
+        .g-b--t6of10 {
+          width: 60%;
+        }
+        .g-b--t4of5,
+        .g-b--t8of10 {
+          width: 80%;
+        }
+        .g-b--t1of6,
+        .g-b--t2of12 {
+          width: 16.666%;
+        }
+        .g-b--t5of6,
+        .g-b--t10of12 {
+          width: 83.333%;
+        }
+        .g-b--t1of8 {
+          width: 12.5%;
+        }
+        .g-b--t3of8 {
+          width: 37.5%;
+        }
+        .g-b--t5of8 {
+          width: 62.5%;
+        }
+        .g-b--t7of8 {
+          width: 87.5%;
+        }
+        .g-b--t1of10 {
+          width: 10%;
+        }
+        .g-b--t3of10 {
+          width: 30%;
+        }
+        .g-b--t7of10 {
+          width: 70%;
+        }
+        .g-b--t9of10 {
+          width: 90%;
+        }
+        .g-b--t1of12 {
+          width: 8.333%;
+        }
+        .g-b--t5of12 {
+          width: 41.666%;
+        }
+        .g-b--t7of12 {
+          width: 58.333%;
+        }
+        .g-b--t11of12 {
+          width: 91.666%;
+        }
+        .g-b--push--t1of1 {
+          margin-left: 100%;
+        }
+        .g-b--push--t1of2,
+        .g-b--push--t2of4,
+        .g-b--push--t3of6,
+        .g-b--push--t4of8,
+        .g-b--push--t5of10,
+        .g-b--push--t6of12 {
+          margin-left: 50%;
+        }
+        .g-b--push--t1of3,
+        .g-b--push--t2of6,
+        .g-b--push--t4of12 {
+          margin-left: 33.333%;
+        }
+        .g-b--push--t2of3,
+        .g-b--push--t4of6,
+        .g-b--push--t8of12 {
+          margin-left: 66.666%;
+        }
+        .g-b--push--t1of4,
+        .g-b--push--t2of8,
+        .g-b--push--t3of12 {
+          margin-left: 25%;
+        }
+        .g-b--push--t3of4,
+        .g-b--push--t6of8,
+        .g-b--push--t9of12 {
+          margin-left: 75%;
+        }
+        .g-b--push--t1of5,
+        .g-b--push--t2of10 {
+          margin-left: 20%;
+        }
+        .g-b--push--t2of5,
+        .g-b--push--t4of10 {
+          margin-left: 40%;
+        }
+        .g-b--push--t3of5,
+        .g-b--push--t6of10 {
+          margin-left: 60%;
+        }
+        .g-b--push--t4of5,
+        .g-b--push--t8of10 {
+          margin-left: 80%;
+        }
+        .g-b--push--t1of6,
+        .g-b--push--t2of12 {
+          margin-left: 16.666%;
+        }
+        .g-b--push--t5of6,
+        .g-b--push--t10of12 {
+          margin-left: 83.333%;
+        }
+        .g-b--push--t1of8 {
+          margin-left: 12.5%;
+        }
+        .g-b--push--t3of8 {
+          margin-left: 37.5%;
+        }
+        .g-b--push--t5of8 {
+          margin-left: 62.5%;
+        }
+        .g-b--push--t7of8 {
+          margin-left: 87.5%;
+        }
+        .g-b--push--t1of10 {
+          margin-left: 10%;
+        }
+        .g-b--push--t3of10 {
+          margin-left: 30%;
+        }
+        .g-b--push--t7of10 {
+          margin-left: 70%;
+        }
+        .g-b--push--t9of10 {
+          margin-left: 90%;
+        }
+        .g-b--push--t1of12 {
+          margin-left: 8.333%;
+        }
+        .g-b--push--t5of12 {
+          margin-left: 41.666%;
+        }
+        .g-b--push--t7of12 {
+          margin-left: 58.333%;
+        }
+        .g-b--push--t11of12 {
+          margin-left: 91.666%;
+        }
+        .g-b--pull--t1of1 {
+          margin-right: 100%;
+        }
+        .g-b--pull--t1of2,
+        .g-b--pull--t2of4,
+        .g-b--pull--t3of6,
+        .g-b--pull--t4of8,
+        .g-b--pull--t5of10,
+        .g-b--pull--t6of12 {
+          margin-right: 50%;
+        }
+        .g-b--pull--t1of3,
+        .g-b--pull--t2of6,
+        .g-b--pull--t4of12 {
+          margin-right: 33.333%;
+        }
+        .g-b--pull--t2of3,
+        .g-b--pull--t4of6,
+        .g-b--pull--t8of12 {
+          margin-right: 66.666%;
+        }
+        .g-b--pull--t1of4,
+        .g-b--pull--t2of8,
+        .g-b--pull--t3of12 {
+          margin-right: 25%;
+        }
+        .g-b--pull--t3of4,
+        .g-b--pull--t6of8,
+        .g-b--pull--t9of12 {
+          margin-right: 75%;
+        }
+        .g-b--pull--t1of5,
+        .g-b--pull--t2of10 {
+          margin-right: 20%;
+        }
+        .g-b--pull--t2of5,
+        .g-b--pull--t4of10 {
+          margin-right: 40%;
+        }
+        .g-b--pull--t3of5,
+        .g-b--pull--t6of10 {
+          margin-right: 60%;
+        }
+        .g-b--pull--t4of5,
+        .g-b--pull--t8of10 {
+          margin-right: 80%;
+        }
+        .g-b--pull--t1of6,
+        .g-b--pull--t2of12 {
+          margin-right: 16.666%;
+        }
+        .g-b--pull--t5of6,
+        .g-b--pull--t10of12 {
+          margin-right: 83.333%;
+        }
+        .g-b--pull--t1of8 {
+          margin-right: 12.5%;
+        }
+        .g-b--pull--t3of8 {
+          margin-right: 37.5%;
+        }
+        .g-b--pull--t5of8 {
+          margin-right: 62.5%;
+        }
+        .g-b--pull--t7of8 {
+          margin-right: 87.5%;
+        }
+        .g-b--pull--t1of10 {
+          margin-right: 10%;
+        }
+        .g-b--pull--t3of10 {
+          margin-right: 30%;
+        }
+        .g-b--pull--t7of10 {
+          margin-right: 70%;
+        }
+        .g-b--pull--t9of10 {
+          margin-right: 90%;
+        }
+        .g-b--pull--t1of12 {
+          margin-right: 8.333%;
+        }
+        .g-b--pull--t5of12 {
+          margin-right: 41.666%;
+        }
+        .g-b--pull--t7of12 {
+          margin-right: 58.333%;
+        }
+        .g-b--pull--t11of12 {
+          margin-right: 91.666%;
+        }
+        .splashscreen-dillinger {
+          width: 500px;
+        }
+        .splashscreen p {
+          font-size: 1.25rem;
+          margin-bottom: 1.43749rem;
+          padding-top: 0.56251rem;
+        }
+        .title {
+          font-size: 0.8rem;
+          margin-bottom: 0.77999rem;
+          padding-top: 0.22001rem;
+        }
+        .title-document {
+          font-size: 1.25rem;
+          margin-bottom: 0.89999rem;
+          padding-top: 0.10001rem;
+        }
+        .menu .menu-item--save-to,
+        .menu .menu-item--import-from {
+          display: block;
+        }
+        .menu .menu-item--preview,
+        .menu .menu-item--save-to.in-sidebar,
+        .menu .menu-item--import-from.in-sidebar {
+          display: none;
+        }
+        .settings a {
+          font-size: 1.25rem;
+        }
+        .words,
+        .characters {
+          font-size: 0.8rem;
+          margin-bottom: 0.77999rem;
+          padding-top: 0.22001rem;
+        }
+        .modal--dillinger.about .modal-dialog {
+          font-size: 1.25rem;
+        }
+        .enter-zen-mode {
+          display: block;
+        }
+        .close-zen-mode {
+          right: 3rem;
+          top: 3rem;
+        }
+        #zen {
+          font-size: 1.25rem;
+          width: 500px;
+        }
+        .split-editor {
+          border-right: 1px solid #e8e8e8;
+          float: left;
+          padding-right: 16px;
+          width: 50%;
+        }
+        .show-preview .split-editor {
+          display: block;
+        }
+        .split-preview {
+          display: block;
+          float: right;
+          position: relative;
+          top: 0;
+          width: 50%;
+        }
+        #editor {
+          font-size: 1rem;
+        }
+        .preview-mode-toggle-src,
+        .preview-mode-toggle-html {
+          display: block;
+        }
+      }
+      @media screen and (min-width: 62.5em) {
+        html {
+          font-size: 0.875em;
+        }
+        body {
+          font-size: 1rem;
+        }
+        ul,
+        ol {
+          margin-bottom: 0.83999rem;
+          padding-top: 0.16001rem;
+        }
+        p {
+          padding-top: 0.66001rem;
+        }
+        p,
+        pre {
+          margin-bottom: 1.33999rem;
+        }
+        pre,
+        blockquote p {
+          font-size: 1rem;
+          padding-top: 0.66001rem;
+        }
+        blockquote p {
+          margin-bottom: 0.33999rem;
+        }
+        h1 {
+          font-size: 2.0571429rem;
+          margin-bottom: 0.21999rem;
+          padding-top: 0.78001rem;
+        }
+        h2 {
+          font-size: 1.953125rem;
+          margin-bottom: 0.1835837rem;
+          padding-top: 0.8164163rem;
+        }
+        h3 {
+          font-size: 1.6457143rem;
+          margin-bottom: 0.07599rem;
+          padding-top: 0.92401rem;
+        }
+        h4 {
+          font-size: 1.5625rem;
+          margin-bottom: 0.546865rem;
+          padding-top: 0.453135rem;
+        }
+        h5 {
+          font-size: 1.25rem;
+          margin-bottom: -0.56251rem;
+          padding-top: 0.56251rem;
+        }
+        h6 {
+          font-size: 1rem;
+          margin-bottom: -0.65001rem;
+          padding-top: 0.65001rem;
+        }
+        .g {
+          margin-left: -16px;
+          margin-right: -16px;
+        }
+        .g-b {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+        .g-b--d1of1 {
+          width: 100%;
+        }
+        .g-b--d1of2,
+        .g-b--d2of4,
+        .g-b--d3of6,
+        .g-b--d4of8,
+        .g-b--d5of10,
+        .g-b--d6of12 {
+          width: 50%;
+        }
+        .g-b--d1of3,
+        .g-b--d2of6,
+        .g-b--d4of12 {
+          width: 33.333%;
+        }
+        .g-b--d2of3,
+        .g-b--d4of6,
+        .g-b--d8of12 {
+          width: 66.666%;
+        }
+        .g-b--d1of4,
+        .g-b--d2of8,
+        .g-b--d3of12 {
+          width: 25%;
+        }
+        .g-b--d3of4,
+        .g-b--d6of8,
+        .g-b--d9of12 {
+          width: 75%;
+        }
+        .g-b--d1of5,
+        .g-b--d2of10 {
+          width: 20%;
+        }
+        .g-b--d2of5,
+        .g-b--d4of10 {
+          width: 40%;
+        }
+        .g-b--d3of5,
+        .g-b--d6of10 {
+          width: 60%;
+        }
+        .g-b--d4of5,
+        .g-b--d8of10 {
+          width: 80%;
+        }
+        .g-b--d1of6,
+        .g-b--d2of12 {
+          width: 16.666%;
+        }
+        .g-b--d5of6,
+        .g-b--d10of12 {
+          width: 83.333%;
+        }
+        .g-b--d1of8 {
+          width: 12.5%;
+        }
+        .g-b--d3of8 {
+          width: 37.5%;
+        }
+        .g-b--d5of8 {
+          width: 62.5%;
+        }
+        .g-b--d7of8 {
+          width: 87.5%;
+        }
+        .g-b--d1of10 {
+          width: 10%;
+        }
+        .g-b--d3of10 {
+          width: 30%;
+        }
+        .g-b--d7of10 {
+          width: 70%;
+        }
+        .g-b--d9of10 {
+          width: 90%;
+        }
+        .g-b--d1of12 {
+          width: 8.333%;
+        }
+        .g-b--d5of12 {
+          width: 41.666%;
+        }
+        .g-b--d7of12 {
+          width: 58.333%;
+        }
+        .g-b--d11of12 {
+          width: 91.666%;
+        }
+        .g-b--push--d1of1 {
+          margin-left: 100%;
+        }
+        .g-b--push--d1of2,
+        .g-b--push--d2of4,
+        .g-b--push--d3of6,
+        .g-b--push--d4of8,
+        .g-b--push--d5of10,
+        .g-b--push--d6of12 {
+          margin-left: 50%;
+        }
+        .g-b--push--d1of3,
+        .g-b--push--d2of6,
+        .g-b--push--d4of12 {
+          margin-left: 33.333%;
+        }
+        .g-b--push--d2of3,
+        .g-b--push--d4of6,
+        .g-b--push--d8of12 {
+          margin-left: 66.666%;
+        }
+        .g-b--push--d1of4,
+        .g-b--push--d2of8,
+        .g-b--push--d3of12 {
+          margin-left: 25%;
+        }
+        .g-b--push--d3of4,
+        .g-b--push--d6of8,
+        .g-b--push--d9of12 {
+          margin-left: 75%;
+        }
+        .g-b--push--d1of5,
+        .g-b--push--d2of10 {
+          margin-left: 20%;
+        }
+        .g-b--push--d2of5,
+        .g-b--push--d4of10 {
+          margin-left: 40%;
+        }
+        .g-b--push--d3of5,
+        .g-b--push--d6of10 {
+          margin-left: 60%;
+        }
+        .g-b--push--d4of5,
+        .g-b--push--d8of10 {
+          margin-left: 80%;
+        }
+        .g-b--push--d1of6,
+        .g-b--push--d2of12 {
+          margin-left: 16.666%;
+        }
+        .g-b--push--d5of6,
+        .g-b--push--d10of12 {
+          margin-left: 83.333%;
+        }
+        .g-b--push--d1of8 {
+          margin-left: 12.5%;
+        }
+        .g-b--push--d3of8 {
+          margin-left: 37.5%;
+        }
+        .g-b--push--d5of8 {
+          margin-left: 62.5%;
+        }
+        .g-b--push--d7of8 {
+          margin-left: 87.5%;
+        }
+        .g-b--push--d1of10 {
+          margin-left: 10%;
+        }
+        .g-b--push--d3of10 {
+          margin-left: 30%;
+        }
+        .g-b--push--d7of10 {
+          margin-left: 70%;
+        }
+        .g-b--push--d9of10 {
+          margin-left: 90%;
+        }
+        .g-b--push--d1of12 {
+          margin-left: 8.333%;
+        }
+        .g-b--push--d5of12 {
+          margin-left: 41.666%;
+        }
+        .g-b--push--d7of12 {
+          margin-left: 58.333%;
+        }
+        .g-b--push--d11of12 {
+          margin-left: 91.666%;
+        }
+        .g-b--pull--d1of1 {
+          margin-right: 100%;
+        }
+        .g-b--pull--d1of2,
+        .g-b--pull--d2of4,
+        .g-b--pull--d3of6,
+        .g-b--pull--d4of8,
+        .g-b--pull--d5of10,
+        .g-b--pull--d6of12 {
+          margin-right: 50%;
+        }
+        .g-b--pull--d1of3,
+        .g-b--pull--d2of6,
+        .g-b--pull--d4of12 {
+          margin-right: 33.333%;
+        }
+        .g-b--pull--d2of3,
+        .g-b--pull--d4of6,
+        .g-b--pull--d8of12 {
+          margin-right: 66.666%;
+        }
+        .g-b--pull--d1of4,
+        .g-b--pull--d2of8,
+        .g-b--pull--d3of12 {
+          margin-right: 25%;
+        }
+        .g-b--pull--d3of4,
+        .g-b--pull--d6of8,
+        .g-b--pull--d9of12 {
+          margin-right: 75%;
+        }
+        .g-b--pull--d1of5,
+        .g-b--pull--d2of10 {
+          margin-right: 20%;
+        }
+        .g-b--pull--d2of5,
+        .g-b--pull--d4of10 {
+          margin-right: 40%;
+        }
+        .g-b--pull--d3of5,
+        .g-b--pull--d6of10 {
+          margin-right: 60%;
+        }
+        .g-b--pull--d4of5,
+        .g-b--pull--d8of10 {
+          margin-right: 80%;
+        }
+        .g-b--pull--d1of6,
+        .g-b--pull--d2of12 {
+          margin-right: 16.666%;
+        }
+        .g-b--pull--d5of6,
+        .g-b--pull--d10of12 {
+          margin-right: 83.333%;
+        }
+        .g-b--pull--d1of8 {
+          margin-right: 12.5%;
+        }
+        .g-b--pull--d3of8 {
+          margin-right: 37.5%;
+        }
+        .g-b--pull--d5of8 {
+          margin-right: 62.5%;
+        }
+        .g-b--pull--d7of8 {
+          margin-right: 87.5%;
+        }
+        .g-b--pull--d1of10 {
+          margin-right: 10%;
+        }
+        .g-b--pull--d3of10 {
+          margin-right: 30%;
+        }
+        .g-b--pull--d7of10 {
+          margin-right: 70%;
+        }
+        .g-b--pull--d9of10 {
+          margin-right: 90%;
+        }
+        .g-b--pull--d1of12 {
+          margin-right: 8.333%;
+        }
+        .g-b--pull--d5of12 {
+          margin-right: 41.666%;
+        }
+        .g-b--pull--d7of12 {
+          margin-right: 58.333%;
+        }
+        .g-b--pull--d11of12 {
+          margin-right: 91.666%;
+        }
+        .splashscreen-dillinger {
+          width: 700px;
+        }
+        .splashscreen p {
+          font-size: 1.25rem;
+          margin-bottom: 1.43749rem;
+          padding-top: 0.56251rem;
+        }
+        .title {
+          font-size: 0.8rem;
+          margin-bottom: 0.77999rem;
+          padding-top: 0.22001rem;
+        }
+        .title-document {
+          font-size: 1.25rem;
+          margin-bottom: 0.89999rem;
+          padding-top: 0.10001rem;
+        }
+        .menu .menu-item--export-as {
+          display: block;
+        }
+        .menu .menu-item--preview {
+          display: none;
+        }
+        .settings a {
+          font-size: 1.25rem;
+        }
+        .words,
+        .characters {
+          font-size: 0.8rem;
+          margin-bottom: 0.77999rem;
+          padding-top: 0.22001rem;
+        }
+        .modal--dillinger.about .modal-dialog,
+        #zen {
+          font-size: 1.25rem;
+        }
+        #zen {
+          width: 700px;
+        }
+        #editor {
+          font-size: 1rem;
+        }
+      }
+      @media screen and (min-width: 87.5em) {
+        html {
+          font-size: 0.875em;
+        }
+        body {
+          font-size: 1rem;
+        }
+        ul,
+        ol {
+          margin-bottom: 0.83999rem;
+          padding-top: 0.16001rem;
+        }
+        p {
+          padding-top: 0.66001rem;
+        }
+        p,
+        pre {
+          margin-bottom: 1.33999rem;
+        }
+        pre,
+        blockquote p {
+          font-size: 1rem;
+          padding-top: 0.66001rem;
+        }
+        blockquote p {
+          margin-bottom: 0.33999rem;
+        }
+        h1 {
+          font-size: 2.0571429rem;
+          margin-bottom: 0.21999rem;
+          padding-top: 0.78001rem;
+        }
+        h2 {
+          font-size: 1.953125rem;
+          margin-bottom: 0.1835837rem;
+          padding-top: 0.8164163rem;
+        }
+        h3 {
+          font-size: 1.6457143rem;
+          margin-bottom: 0.07599rem;
+          padding-top: 0.92401rem;
+        }
+        h4 {
+          font-size: 1.5625rem;
+          margin-bottom: 0.546865rem;
+          padding-top: 0.453135rem;
+        }
+        h5 {
+          font-size: 1.25rem;
+          margin-bottom: -0.56251rem;
+          padding-top: 0.56251rem;
+        }
+        h6 {
+          font-size: 1rem;
+          margin-bottom: -0.65001rem;
+          padding-top: 0.65001rem;
+        }
+        .splashscreen-dillinger {
+          width: 800px;
+        }
+        .splashscreen p {
+          font-size: 1.25rem;
+          margin-bottom: 1.43749rem;
+          padding-top: 0.56251rem;
+        }
+        .title {
+          font-size: 0.8rem;
+          margin-bottom: 0.77999rem;
+          padding-top: 0.22001rem;
+        }
+        .title-document {
+          margin-bottom: 0.89999rem;
+          padding-top: 0.10001rem;
+        }
+        .title-document,
+        .settings a {
+          font-size: 1.25rem;
+        }
+        .words,
+        .characters {
+          font-size: 0.8rem;
+          margin-bottom: 0.77999rem;
+          padding-top: 0.22001rem;
+        }
+        .modal--dillinger.about .modal-dialog,
+        #zen {
+          font-size: 1.25rem;
+        }
+        #editor {
+          font-size: 1rem;
+        }
+      }
+      @media (min-width: 768px) {
+        .form-inline .form-group {
+          display: inline-block;
+          margin-bottom: 0;
+          vertical-align: middle;
+        }
+        .form-inline .form-control {
+          display: inline-block;
+          width: auto;
+          vertical-align: middle;
+        }
+        .form-inline .input-group {
+          display: inline-table;
+          vertical-align: middle;
+        }
+        .form-inline .input-group .input-group-addon,
+        .form-inline .input-group .input-group-btn,
+        .form-inline .input-group .form-control {
+          width: auto;
+        }
+        .form-inline .input-group > .form-control {
+          width: 100%;
+        }
+        .form-inline .control-label {
+          margin-bottom: 0;
+          vertical-align: middle;
+        }
+        .form-inline .radio,
+        .form-inline .checkbox {
+          display: inline-block;
+          margin-top: 0;
+          margin-bottom: 0;
+          vertical-align: middle;
+        }
+        .form-inline .radio label,
+        .form-inline .checkbox label {
+          padding-left: 0;
+        }
+        .form-inline .radio input[type="radio"],
+        .form-inline .checkbox input[type="checkbox"] {
+          position: relative;
+          margin-left: 0;
+        }
+        .form-inline .has-feedback .form-control-feedback {
+          top: 0;
+        }
+        .form-horizontal .control-label {
+          text-align: right;
+          margin-bottom: 0;
+          padding-top: 7px;
+        }
+        .form-horizontal .form-group-lg .control-label {
+          padding-top: 14.3px;
+        }
+        .form-horizontal .form-group-sm .control-label {
+          padding-top: 6px;
+        }
+        .modal-dialog {
+          width: 600px;
+          margin: 30px auto;
+        }
+        .modal-content {
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        .modal-sm {
+          width: 300px;
+        }
+      }
+      @media (min-width: 992px) {
+        .modal-lg {
+          width: 900px;
+        }
+      }
+      @media screen and (max-width: 1200px) {
+        #_default_ {
+          max-width: 30%;
+        }
+        #_default_ ._default_ {
+          font-size: 0.825rem;
+          line-height: 0.875rem;
+          padding: 12px 12px 6px 24px;
+          text-align: justify;
+        }
+      }
+      @media screen and (max-width: 1100px) {
+        #_default_ {
+          max-width: 27%;
+        }
+        #_default_ ._default_ {
+          font-size: 0.8rem;
+          line-height: 0.85rem;
+          padding: 12px 6px 6px 24px;
+          text-align: justify;
+        }
+      }
+      @media screen and (max-width: 1000px) {
+        #_default_ {
+          max-width: 24%;
+        }
+        #_default_ ._default_ {
+          font-size: 0.775rem;
+          line-height: 0.8rem;
+          padding: 12px 6px 6px 24px;
+          text-align: justify;
+        }
+      }
+      @media screen and (max-width: 900px) {
+        #_default_ {
+          max-width: 30%;
+        }
+      }
+      @media screen and (max-width: 767px) {
+        .table-responsive {
+          width: 100%;
+          margin-bottom: 15px;
+          overflow-y: hidden;
+          overflow-x: auto;
+          -ms-overflow-style: -ms-autohiding-scrollbar;
+          border: 1px solid #ddd;
+          -webkit-overflow-scrolling: touch;
+        }
+        .table-responsive > .table {
+          margin-bottom: 0;
+        }
+        .table-responsive > .table > thead > tr > th,
+        .table-responsive > .table > thead > tr > td,
+        .table-responsive > .table > tbody > tr > th,
+        .table-responsive > .table > tbody > tr > td,
+        .table-responsive > .table > tfoot > tr > th,
+        .table-responsive > .table > tfoot > tr > td {
+          white-space: nowrap;
+        }
+        .table-responsive > .table-bordered {
+          border: 0;
+        }
+        .table-responsive > .table-bordered > thead > tr > th:first-child,
+        .table-responsive > .table-bordered > thead > tr > td:first-child,
+        .table-responsive > .table-bordered > tbody > tr > th:first-child,
+        .table-responsive > .table-bordered > tbody > tr > td:first-child,
+        .table-responsive > .table-bordered > tfoot > tr > th:first-child,
+        .table-responsive > .table-bordered > tfoot > tr > td:first-child {
+          border-left: 0;
+        }
+        .table-responsive > .table-bordered > thead > tr > th:last-child,
+        .table-responsive > .table-bordered > thead > tr > td:last-child,
+        .table-responsive > .table-bordered > tbody > tr > th:last-child,
+        .table-responsive > .table-bordered > tbody > tr > td:last-child,
+        .table-responsive > .table-bordered > tfoot > tr > th:last-child,
+        .table-responsive > .table-bordered > tfoot > tr > td:last-child {
+          border-right: 0;
+        }
+        .table-responsive > .table-bordered > tbody > tr:last-child > th,
+        .table-responsive > .table-bordered > tbody > tr:last-child > td,
+        .table-responsive > .table-bordered > tfoot > tr:last-child > th,
+        .table-responsive > .table-bordered > tfoot > tr:last-child > td {
+          border-bottom: 0;
+        }
+      }
+      @media screen and (max-width: 720px) {
+        #_default_ {
+          max-width: 60%;
+        }
+        #_default_ ._default_ {
+          font-size: 0.75rem;
+          line-height: 1rem;
+          padding: 12px 24px;
+        }
+      }
+      @media screen and (max-width: 620px) {
+        #_default_ {
+          max-width: 50%;
+        }
+        #_default_ ._default_ {
+          font-size: 0.66rem;
+          letter-spacing: 1px;
+          line-height: 1rem;
+          padding: 10px 24px;
+        }
+      }
+      @media screen and (max-width: 520px) {
+        #_default_ ._default_ {
+          font-size: 0.4rem;
+          line-height: 0.875rem;
+          padding: 6px 12px 6px 24px;
+          text-align: justify;
+        }
+      }
+      @media screen and (max-width: 460px) {
+        #_default_ {
+          display: none;
+        }
+      }
+      @media screen and (max-width: 46.1875em) {
+        .editor-header {
+          display: none;
+        }
+        .editor-header--first {
+          display: block;
+          width: 100%;
+        }
+      }
+    </style>
+    <script>
+      function toggle_visibility(id1, id2) {
+        var e = document.getElementById(id1);
+        var e2 = document.getElementById(id2);
+        var btn = document.getElementById("button");
+        if (e.style.display == "none") {
+          e.style.display = "block"; //block will show the conain in div
+          e2.style.display = "none";
+          btn.innerHTML = "Euskera";
+        } else {
+          e.style.display = "none";
+          e2.style.display = "block";
+          btn.innerHTML = "Castellano";
+        }
+      }
+    </script>
+  </head>
+  <body id="preview">
+    <a id="button" href="#id" onclick="toggle_visibility('id1', 'id2');"
+      >Castellano</a
+    >
+    <div id="id1" style="display: none">
+      <pre><code class="has-line-data" data-line-start="1" data-line-end="4">Donostia-San Sebastián, septiembre 2020 Dirección</code></pre>
+      <h1 class="code-line" data-line-start="4" data-line-end="5">
+        <a
+          id="MEDIDAS_PREVENTIVAS_Y_PROTOCOLO_DE_ACTUACIN_DE_VUELTA_A_LA_ACTIVIDAD_LABORAL_PRESENCIAL_COVID19_4"
+        ></a
+        >MEDIDAS PREVENTIVAS Y PROTOCOLO DE ACTUACIÓN DE VUELTA A LA ACTIVIDAD
+        LABORAL PRESENCIAL (COVID-19)
+      </h1>
+      <h1 class="code-line" data-line-start="6" data-line-end="7">
+        <a id="VICOMTECH_6"></a>VICOMTECH
+      </h1>
+      <h2 class="code-line" data-line-start="9" data-line-end="10">
+        <a id="NDICE_9"></a>ÍNDICE
+      </h2>
+      <ol>
+        <li class="has-line-data" data-line-start="11" data-line-end="12">
+          ANTECEDENTES
+        </li>
+        <li class="has-line-data" data-line-start="12" data-line-end="19">
+          MEDIDAS DE PREVENCIÓN GENERALES PARA EVITAR EL CONTAGIO<br />
+          2.1. Personal de Vicomtech: antes de ir a las instalaciones de
+          Vicomtech<br />
+          2.2. Medidas en Vicomtech<br />
+          2.2.1. Acceso a instalaciones y movilidad<br />
+          2.2.2. Higiene<br />
+          2.2.3. Organizativas<br />
+          2.2.4. Visitas y mensajería
+        </li>
+        <li class="has-line-data" data-line-start="19" data-line-end="22">
+          MEDIDAS DE PREVENCIÓN EN CASO DE SOSPECHA O INFECCIÓN<br />
+          3.1. Medidas para el personal presencial<br />
+          3.2. Medidas para el personal en remoto
+        </li>
+        <li class="has-line-data" data-line-start="22" data-line-end="23">
+          LIMPIEZA Y DESINFECCIÓN DE INSTALACIONES
+        </li>
+        <li class="has-line-data" data-line-start="23" data-line-end="24">
+          MEDIDAS DE CONCILIACIÓN
+        </li>
+        <li class="has-line-data" data-line-start="24" data-line-end="25">
+          COLECTIVOS DE RIESGO
+        </li>
+        <li class="has-line-data" data-line-start="25" data-line-end="26">
+          ENLACES DE INTERÉS
+        </li>
+      </ol>
+      <h2 class="code-line" data-line-start="28" data-line-end="29">
+        <a id="1_ANTECEDENTES_28"></a>1. ANTECEDENTES
+      </h2>
+      <p class="has-line-data" data-line-start="30" data-line-end="38">
+        El 3 de marzo de 2020 entró en vigor en Vicomtech el primer protocolo de
+        actuación y medidas<br />
+        preventivas respecto a la situación de salud pública ocasionada por la
+        propagación del COVID- 19.<br />
+        Contenía las medidas de prevención publicadas por el Gobierno Vasco y
+        Ministerio de Sanidad.<br />
+        Posteriormente, se realizó una salida ordenada de los edificios para
+        poder realizar trabajo en<br />
+        remoto mientras durase el confinamiento. A su vez, con la publicación de
+        Real Decreto 10/<br />
+        sobre el COVID-19, la gran mayoría del personal de Vicomtech pudieron
+        efectuar sus labores en<br />
+        esta modalidad, con algunos servicios mínimos indispensables según el
+        artículo 9 de dicho<br />
+        decreto.
+      </p>
+      <p class="has-line-data" data-line-start="39" data-line-end="42">
+        Las instrucciones recogidas en el presente protocolo se han definido en
+        la Dirección de Vicomtech<br />
+        y de acuerdo con las directrices de la Organización Mundial de la Salud,
+        del Ministerio de Sanidad<br />
+        y del Gobierno Vasco.
+      </p>
+      <p class="has-line-data" data-line-start="43" data-line-end="46">
+        Dada la velocidad con la que cambian los acontecimientos, estas
+        instrucciones serán adaptadas y<br />
+        validadas por Dirección en colaboración con la Unidad de Gestión de
+        I+D+i de acuerdo con las<br />
+        directrices que establezcan las autoridades sanitarias en cada momento.
+      </p>
+      <h2 class="code-line" data-line-start="47" data-line-end="48">
+        <a id="2_MEDIDAS_DE_PREVENCIN_GENERALES_PARA_EVITAR_EL_CONTAGIO_47"></a
+        >2. MEDIDAS DE PREVENCIÓN GENERALES PARA EVITAR EL CONTAGIO
+      </h2>
+      <p class="has-line-data" data-line-start="49" data-line-end="54">
+        En Vicomtech los riesgos laborales ordinarios (visualización de
+        pantallas, ergonomía y seguridad<br />
+        vial) no afectan a la propagación del virus. Sin embargo, respecto a la
+        situación extraordinaria<br />
+        ocasionada por la emergencia del COVID-19, se definen adicionalmente las
+        pautas que todas<br />
+        personas empleadas en Vicomtech deben seguir en las primeras etapas de
+        la reincorporación al<br />
+        trabajo presencial y se describen en las secciones siguientes.
+      </p>
+      <h2 class="code-line" data-line-start="55" data-line-end="56">
+        <a
+          id="21_Personal_de_Vicomtech_antes_de_ir_a_las_instalaciones_de_Vicomtech_55"
+        ></a
+        >2.1. Personal de Vicomtech: antes de ir a las instalaciones de
+        Vicomtech
+      </h2>
+      <pre><code class="has-line-data" data-line-start="58" data-line-end="60">Se recuerda a todo el personal los síntomas generales que provoca COVID-19 y su duración:
+            </code></pre>
+      <ul>
+        <li class="has-line-data" data-line-start="60" data-line-end="61">
+          Es posible que se tenga fiebre, incluida una que no alcance la marca
+          de 37,8 ° C.
+        </li>
+        <li class="has-line-data" data-line-start="61" data-line-end="62">
+          Se puede perder el sentido del olfato.
+        </li>
+        <li class="has-line-data" data-line-start="62" data-line-end="63">
+          Se puede tener cansancio, dolores musculares o dolor de cabeza.
+        </li>
+        <li class="has-line-data" data-line-start="63" data-line-end="65">
+          No es muy probable que se tenga dolor de garganta o secreción nasal,
+          pero ocurren<br />
+          en algunos casos.
+        </li>
+        <li class="has-line-data" data-line-start="65" data-line-end="67">
+          Por lo general, los síntomas parecen durar entre 7 y 10 días.
+        </li>
+      </ul>
+      <pre><code class="has-line-data" data-line-start="68" data-line-end="71">Las personas que tengan algún tipo de los síntomas enunciados, tendrían que avisar lo antes
+            posible a covid@vicomtech.org y a su DAR antes de acudir a las instalaciones de Vicomtech.
+            </code></pre>
+      <h2 class="code-line" data-line-start="71" data-line-end="72">
+        <a id="22_Medidas_en_Vicomtech_71"></a>2.2. Medidas en Vicomtech
+      </h2>
+      <h2 class="code-line" data-line-start="73" data-line-end="74">
+        <a id="221_Acceso_a_instalaciones_y_movilidad_73"></a>2.2.1. Acceso a
+        instalaciones y movilidad
+      </h2>
+      <ul>
+        <li class="has-line-data" data-line-start="75" data-line-end="79">
+          <p class="has-line-data" data-line-start="75" data-line-end="79">
+            Se bloquea el acceso a Vicomtech desde el garaje. Se debe realizar
+            desinfección y medida<br />
+            de temperatura por la puerta principal de cada edificio (se
+            implantarán medidas de<br />
+            protocolo en todos los edificios, hasta que no estén, se seguirá
+            entrando por el edificio<br />
+            57 ).
+          </p>
+        </li>
+        <li class="has-line-data" data-line-start="79" data-line-end="82">
+          <p class="has-line-data" data-line-start="79" data-line-end="81">
+            En la 1ª planta del 57 se accede por la puerta de cristal más
+            cercana a Sistemas y se sale<br />
+            por la de V6.
+          </p>
+        </li>
+        <li class="has-line-data" data-line-start="82" data-line-end="84">
+          <p class="has-line-data" data-line-start="82" data-line-end="84">
+            Se subirá y bajará por las escaleras visualizando primero si hay
+            alguien con quien pueda<br />
+            encontrarme. En todo el edificio.
+          </p>
+        </li>
+        <li class="has-line-data" data-line-start="84" data-line-end="86">
+          <p class="has-line-data" data-line-start="84" data-line-end="86">
+            Funcionamiento similar en el <strong>63</strong>. Excepción: acceso
+            laboratorios. Bajada en ascensor;<br />
+            salida por puerta peatonal del garaje hacia la puerta principal del
+            edificio.
+          </p>
+        </li>
+        <li class="has-line-data" data-line-start="86" data-line-end="89">
+          <p class="has-line-data" data-line-start="86" data-line-end="89">
+            Acceso al <strong>61</strong> : Zonas comunes del edificio, seguir
+            indicaciones del Parke. Escaleras para<br />
+            subir y bajar. Acceso a laboratorios: bajada en ascensor, salida por
+            puerta peatonal del<br />
+            garaje hacia la puerta principal del edificio.
+          </p>
+        </li>
+        <li class="has-line-data" data-line-start="89" data-line-end="94">
+          <p class="has-line-data" data-line-start="89" data-line-end="93">
+            Acceso al <strong>71</strong>. Zonas comunes del edificio, seguir
+            indicaciones del Parke. Una vez dentro,<br />
+            la ruta sería hacer la vuelta por la derecha, o sea, al entrar tirar
+            hacia las salas de<br />
+            reuniones, llegar hasta la zona de investigadores y salir por el
+            pasillo que pasa delante del<br />
+            office y el laboratorio.
+          </p>
+        </li>
+      </ul>
+      <h2 class="code-line" data-line-start="94" data-line-end="95">
+        <a id="222_Higiene_94"></a>2.2.2. Higiene
+      </h2>
+      <ul>
+        <li class="has-line-data" data-line-start="96" data-line-end="99">
+          En la entrada de Vicomtech podrás observar que existe un protocolo de
+          entrada donde<br />
+          será obligatorio antes de ir al lugar de trabajo desinfectarse las
+          mano con gel<br />
+          hidroalcohólico.
+        </li>
+        <li class="has-line-data" data-line-start="99" data-line-end="100">
+          En caso de no disponer mascarilla, existe la posibilidad de cogerla en
+          la entrada del 57.
+        </li>
+        <li class="has-line-data" data-line-start="100" data-line-end="104">
+          No es necesario el uso de mascarilla en puesto de trabajo dado que se
+          dispone de cristal<br />
+          separador. Sin embargo, se deberá utilizar mascarilla cuando se
+          abandone el puesto de<br />
+          trabajo por cualquier actividad que se tenga que hacer y para la cual
+          no haya garantía de<br />
+          distancia de seguridad entre las personas (dos metros).
+        </li>
+        <li class="has-line-data" data-line-start="104" data-line-end="106">
+          Higiene de manos frecuente (lavado con agua y jabón o soluciones
+          alcohólicas),<br />
+          especialmente después de contacto cercano con personas.
+        </li>
+        <li class="has-line-data" data-line-start="106" data-line-end="107">
+          Al toser o estornudar, cubrirse la boca y la nariz con el codo
+          flexionado.
+        </li>
+        <li class="has-line-data" data-line-start="107" data-line-end="108">
+          Usar pañuelos desechables y tirarlos al recipiente correspondiente
+          tras su uso.
+        </li>
+        <li class="has-line-data" data-line-start="108" data-line-end="110">
+          Evitar el contacto cercano (manteniendo una distancia de dos metros
+          aproximadamente)<br />
+          con otras personas.
+        </li>
+        <li class="has-line-data" data-line-start="110" data-line-end="111">
+          Evitar tocarse los ojos, la nariz y la boca, ya que las manos
+          facilitan la transmisión.
+        </li>
+        <li class="has-line-data" data-line-start="111" data-line-end="114">
+          Evitar tocar con las manos y otros miembros del cuerpo directamente
+          manillas de<br />
+          puertas, botones de ascensor, etc. Se dispone de abrepuertas que
+          también se pueden<br />
+          solicitar.
+        </li>
+        <li class="has-line-data" data-line-start="114" data-line-end="116">
+          Antes de volver a casa, se recomienda la limpieza de manos.
+        </li>
+      </ul>
+      <p class="has-line-data" data-line-start="116" data-line-end="119">
+        Se dispone de carteles informativos en los aseos de todos los edificios
+        de Vicomtech así como de<br />
+        geles hidroalcohólicos en lugares comunes o donde se comparten espacios
+        (fotocopiadoras y<br />
+        baños por ejemplo).
+      </p>
+      <h2 class="code-line" data-line-start="120" data-line-end="121">
+        <a id="223_Organizativas_120"></a>2.2.3. Organizativas
+      </h2>
+      <ul>
+        <li class="has-line-data" data-line-start="122" data-line-end="126">
+          Se dispondrá de una app desarrollada en Vicomtech a través del
+          proyecto Rapid. Se<br />
+          instalará la aplicación y se pondrá en uso mientras se esté en
+          Vicomtech (la aplicación<br />
+          activa y el móvil se trasladará con la persona en los
+          desplazamientos). El personal que no<br />
+          se quiera instalar la aplicación, deberá firmar un documento de
+          renuncia.
+        </li>
+        <li class="has-line-data" data-line-start="126" data-line-end="129">
+          Las máquinas de café y suministradoras de comida estarán en
+          funcionamiento<br />
+          (disponemos de abrepuertas que valen para tocar botones y la higiene
+          descrita en el punto<br />
+          anterior).
+        </li>
+        <li class="has-line-data" data-line-start="129" data-line-end="132">
+          Se recomienda no salir fuera del entorno de Vicomtech para disminuir
+          el riesgo de<br />
+          contagio y en caso de salir, se recomienda realizarlo en grupos
+          reducidos (2-3 personas).<br />
+          La asistencia al Bizi o Kutxaespacio sería en grupos reducidos también
+          (2-3 personas).
+        </li>
+      </ul>
+      <ul>
+        <li class="has-line-data" data-line-start="134" data-line-end="137">
+          Las reuniones deberán respetar mínimo dos metros de distancia
+          aproximado entre las<br />
+          personas (las sillas de las salas de reuniones las verás apiladas por
+          este motivo). En caso<br />
+          de no ser así, la mascarilla es obligatoria.
+        </li>
+        <li class="has-line-data" data-line-start="137" data-line-end="139">
+          Las puertas en general permanecerán abiertas (despachos, salas de
+          reuniones, etc) de<br />
+          forma que no haya que tocar las manillas (en la medida de lo posible).
+        </li>
+        <li class="has-line-data" data-line-start="139" data-line-end="140">
+          Se evitará el desplazamiento entre edificios (entre áreas) salvo
+          necesidad.
+        </li>
+        <li class="has-line-data" data-line-start="140" data-line-end="143">
+          En caso de operación directa con herramientas y equipos (labores de<br />
+          Sistemas/mantenimiento o uso de laboratorios) se procederá a la
+          limpieza de manos<br />
+          posterior.
+        </li>
+        <li class="has-line-data" data-line-start="143" data-line-end="147">
+          Se priorizará el desplazamiento en vehículo propio, y en caso de no
+          disponer de él<br />
+          se podrá viajar en vehículo de Vicomtech y se intentará viajar en
+          solitario (más personas,<br />
+          con mascarilla). El vehículo posteriormente deberá ser desinfectado
+          (existen productos e<br />
+          instrucciones de uso).
+        </li>
+        <li class="has-line-data" data-line-start="147" data-line-end="149">
+          Se evitarán concentraciones en office, entrada o zonas de descanso.
+          Especial atención a<br />
+          las horas de entrada y salida de la jornada laboral.
+        </li>
+        <li class="has-line-data" data-line-start="149" data-line-end="151">
+          En aquellas zonas o espacios en los que pueden confluir grupos de
+          personas (entrada,<br />
+          etc.) el número deberá ser reducido y se tendrá puesta la mascarilla.
+        </li>
+        <li class="has-line-data" data-line-start="151" data-line-end="157">
+          Los offices estarán abiertos para tomar café y para comer si bien se
+          definirán turnos por<br />
+          departamentos. Se habilitarán dos office nuevos en el edificio de DHL.
+          Se seguirán las<br />
+          normas de higiene (desinfección una vez utilizado el lugar) y
+          distancia entre compañeros<br />
+          (marcado por las sillas habilitadas). Las personas que por cercanía
+          del domicilio prefieran<br />
+          ir a sus domicilios a comer avisarán a covid@vicomtech.org para
+          adaptar si es caso la<br />
+          gestión de los office.
+        </li>
+        <li class="has-line-data" data-line-start="157" data-line-end="162">
+          Se aconseja airear los espacios para mitigar riesgo, es decir, en la
+          medida de lo posible,<br />
+          se tendrán las ventanas abiertas para que haya ventilación continua y
+          renovación<br />
+          de aire. En caso de no ser posible, se utilizará la ventilación
+          forzada (climatización)<br />
+          con los caudales del Parke (agua fría).
+        </li>
+      </ul>
+      <h2 class="code-line" data-line-start="162" data-line-end="163">
+        <a id="224_Visitas_y_mensajera_162"></a>2.2.4. Visitas y mensajería
+      </h2>
+      <ul>
+        <li class="has-line-data" data-line-start="164" data-line-end="168">
+          El personal externo tendrá que realizar el protocolo de entrada que
+          consiste en la<br />
+          desinfección de manos y uso de mascarilla. No se permitirá su entrada
+          si su temperatura<br />
+          corporal es mayor de 37 grados. Se mantendrá la distancia de seguridad
+          en la entrada<br />
+          (línea de seguridad colocada).
+        </li>
+        <li class="has-line-data" data-line-start="168" data-line-end="172">
+          En caso de que alguna persona de Vicomtech tenga que desplazarse a
+          otra organización,<br />
+          antes se verificará que la organización de destino cumple con las
+          medidas de prevención<br />
+          adecuadas frente al COVID-19.
+        </li>
+      </ul>
+      <h2 class="code-line" data-line-start="172" data-line-end="173">
+        <a id="3_MEDIDAS_DE_PREVENCIN_EN_CASO_DE_SOSPECHA_O_INFECCIN_172"></a>3.
+        MEDIDAS DE PREVENCIÓN EN CASO DE SOSPECHA O INFECCIÓN
+      </h2>
+      <p class="has-line-data" data-line-start="174" data-line-end="176">
+        Para poder entender en su totalidad este apartado es conveniente tener
+        en cuenta los siguientes<br />
+        puntos:
+      </p>
+      <ul>
+        <li class="has-line-data" data-line-start="177" data-line-end="181">
+          Se considerará caso de sospecha aquel que, teniendo síntomas de COVID-
+          19 , se le haya<br />
+          enviado a realizar la prueba PCR (en consecuencia, se excluyen
+          aquellos casos que sin<br />
+          tener síntomas se les haga prueba, léase, pruebas preoperatorias u en
+          otro tipo de<br />
+          infecciones no relacionadas con COVID-19).
+        </li>
+        <li class="has-line-data" data-line-start="181" data-line-end="189">
+          Se considera contacto directo o estrecho aquel que haya estado en el
+          mismo lugar que un<br />
+          caso, a distancia menor de 2 metros y durante más de 15 minutos. No se
+          considera<br />
+          contacto directo a las personas que están trabajando en su puesto de
+          trabajo con los<br />
+          cristales de separación o distancias de seguridad estipuladas (se han
+          revisado los puestos<br />
+          y modificado algunos por este motivo). Sin embargo, sí aplica esta
+          norma a los office en la<br />
+          hora de la comida y no aplicaría en los 15 minutos de café. A criterio
+          médico o de<br />
+          Vicomtech, se pueden añadir otros casos al rastreo inicial.
+        </li>
+      </ul>
+      <h2 class="code-line" data-line-start="189" data-line-end="190">
+        <a id="31_Medidas_para_el_personal_presencial_189"></a>3.1. Medidas para
+        el personal presencial
+      </h2>
+      <p class="has-line-data" data-line-start="191" data-line-end="192">
+        Los escenarios posibles y las medidas que se emplearán en Vicomtech son
+        las que siguen:
+      </p>
+      <ul>
+        <li class="has-line-data" data-line-start="193" data-line-end="199">
+          En caso de ser llamado a realizar la prueba PRC y tener síntomas
+          COVID-19: ese mismo día<br />
+          la persona se quedaría en casa y avisaría a covid@vicomtech.org así
+          como a su DAR.<br />
+          Vicomtech realizará un rastreo de los contactos directos que, por
+          precaución (no por<br />
+          protocolo de sanidad), también trabajarían en remoto hasta saber el
+          resultado. En caso<br />
+          de confirmase el caso se procedería a realizar test a los contactos
+          directos y se seguirán<br />
+          los protocolos de sanidad.
+        </li>
+        <li class="has-line-data" data-line-start="199" data-line-end="205">
+          En caso de ser contacto directo de un caso confirmado fuera de
+          Vicomtech: tras la llamada<br />
+          de los rastreadores, se avisará avisa a covid@vicomtech.org y al DAR.
+          Por precaución (no<br />
+          por protocolo de sanidad), en caso de que haya un contacto directo en
+          Vicomtech de una<br />
+          persona externa al centro, la persona empleada en Vicomtech no vendrá
+          a las<br />
+          instalaciones hasta que desde Sanidad se lo autoricen.
+        </li>
+      </ul>
+      <p class="has-line-data" data-line-start="205" data-line-end="208">
+        En todos los casos y cuando Vicomtech lo considere necesario, se
+        evaluará la conveniencia de extender test PCR a las personas que hayan
+        tenido contacto y que Osakidetza no les haya citado a realizarlo.
+        También se procederá a agilizar los test con alternativa privada<br />
+        Se procederá a la desinfección concienzuda de las zonas afectadas y se
+        procederá a ayudar a los<br />
+        rastreadores a realizar su trabajo.
+      </p>
+      <h2 class="code-line" data-line-start="209" data-line-end="210">
+        <a id="32_Medidas_para_el_personal_en_remoto_209"></a>3.2. Medidas para
+        el personal en remoto
+      </h2>
+      <p class="has-line-data" data-line-start="211" data-line-end="214">
+        Se apela a la responsabilidad del personal para informar a
+        covid@vicomtech.org y al DAR si existen<br />
+        circunstancias personales relevantes en torno a este procedimiento y que
+        afecten a la<br />
+        organización (bajas laborales, etc).
+      </p>
+      <p class="has-line-data" data-line-start="215" data-line-end="218">
+        Las personas que causen infección o haya sospecha del mismo (mientras se
+        están realizando<br />
+        pruebas) tendrán que seguir las instrucciones de Osakidetza, avisando a
+        covid@vicomtech.org y a<br />
+        su propio DAR. Vicomtech les proporcionará los recursos que se requieran
+        para estos casos.
+      </p>
+      <h2 class="code-line" data-line-start="219" data-line-end="220">
+        <a id="4_LIMPIEZA_Y_DESINFECCIN_DE_INSTALACIONES_219"></a>4. LIMPIEZA Y
+        DESINFECCIÓN DE INSTALACIONES
+      </h2>
+      <p class="has-line-data" data-line-start="221" data-line-end="223">
+        Se reforzará la limpieza en frecuencia y profundidad sobre todo en
+        espacios comunes como salas<br />
+        de reuniones, descansillos, etc.
+      </p>
+      <p class="has-line-data" data-line-start="224" data-line-end="226">
+        Los productos a utilizar serán desinfectantes y el personal de limpieza
+        cumplirá con las medidas<br />
+        de prevención estipuladas para su sector.
+      </p>
+      <h2 class="code-line" data-line-start="227" data-line-end="228">
+        <a id="5_MEDIDAS_DE_CONCILIACIN_227"></a>5. MEDIDAS DE CONCILIACIÓN
+      </h2>
+      <p class="has-line-data" data-line-start="229" data-line-end="232">
+        Vicomtech dispone de un procedimiento de Conciliación Laboral que quedó
+        activado en marzo y<br />
+        del que se está haciendo uso. En caso de necesitar acogerse a la
+        política de trabajo en remoto en<br />
+        gestión de pandemia se deberá realizar la solicitud justificando el
+        motivo.
+      </p>
+      <h2 class="code-line" data-line-start="234" data-line-end="235">
+        <a id="6_COLECTIVOS_DE_RIESGO_234"></a>6. COLECTIVOS DE RIESGO
+      </h2>
+      <p class="has-line-data" data-line-start="236" data-line-end="238">
+        Los colectivos de riesgo pueden optar a la política de trabajo en remoto
+        activada a partir del 7 de<br />
+        septiembre de 2020.
+      </p>
+      <h2 class="code-line" data-line-start="239" data-line-end="240">
+        <a id="7_ENLACES_DE_INTERS_239"></a>7. ENLACES DE INTERÉS
+      </h2>
+      <p class="has-line-data" data-line-start="241" data-line-end="242">
+        Para más información, se pueden consultar las siguientes fuentes
+        oficiales.
+      </p>
+      <ul>
+        <li class="has-line-data" data-line-start="243" data-line-end="246">
+          Departamento de Sanidad del Gobierno Vasco:
+          <a href="http://www.euskadi.eus/informacion-y-"
+            >http://www.euskadi.eus/informacion-y-recomendaciones-generales-de-actuacion-en-euskadi-ante-el-nuevo-coronavirus/web01-a2gaixo/es/</a
+          >
+          <br />
+        </li>
+        <li class="has-line-data" data-line-start="246" data-line-end="249">
+          Ministerio de Sanidad:<br />
+          <a
+            href="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov-"
+            >https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov-China/home.htm</a
+          ><br />
+        </li>
+        <li class="has-line-data" data-line-start="249" data-line-end="251">
+          Centro Europeo para la Prevención y el Control de Enfermedades
+          (ECDC):<br />
+          <a href="https://www.ecdc.europa.eu/en/novel-coronavirus-china"
+            >https://www.ecdc.europa.eu/en/novel-coronavirus-china</a
+          >
+        </li>
+        <li class="has-line-data" data-line-start="251" data-line-end="252">
+          Organización Mundial de la Salud (OMS):
+          <a
+            href="https://www.who.int/health-topics/coronavirushttps://www.who.int/health-topics/coronavirus"
+          >
+          </a>
+        </li>
+        <li class="has-line-data" data-line-start="252" data-line-end="256">
+          Recomendaciones de operación y mantenimiento de los sistemas de
+          climatización y<br />
+          ventilación de edificios y locales para la prevención de la
+          propagación del SARS-COV-2:<br />
+          <a
+            href="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/docu"
+            >https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Recomendaciones_de_operacion_y_mantenimiento.pdf</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div id="id2">
+      <pre><code class="has-line-data" data-line-start="1" data-line-end="4">Donostia-San Sebastián, 2020 ko iraila Zuzendaritza</code></pre>
+      <h1 class="code-line" data-line-start="4" data-line-end="5">
+        <a
+          id="PREBENTZIO_NEURRIAK_ETA_LANJARDUERA_PRESENTZIALERA_ITZULTZEKO_JARDUERAPROTOKOLOA_COVID19_4"
+        ></a
+        >PREBENTZIO NEURRIAK ETA LAN-JARDUERA PRESENTZIALERA ITZULTZEKO
+        JARDUERA-PROTOKOLOA (COVID-19)
+      </h1>
+      <h1 class="code-line" data-line-start="5" data-line-end="6">
+        <a id="VICOMTECH_5"></a>VICOMTECH
+      </h1>
+      <h2 class="code-line" data-line-start="7" data-line-end="8">
+        <a id="AURKIBIDEA_7"></a>AURKIBIDEA
+      </h2>
+      <ol>
+        <li class="has-line-data" data-line-start="8" data-line-end="9">
+          AURREKARIAK
+        </li>
+        <li class="has-line-data" data-line-start="9" data-line-end="16">
+          KUTSATZEA SAIHESTEKO PREBENTZIO-NEURRI OROKORRAK<br />
+          2.1. Langileak: Vicomtecheko instalazioetara joan aurretik eta
+          ondoren<br />
+          2.2. Neurriak Vicomtechen<br />
+          2.2.1. Instalazioetarako sarbidea eta mugikortasuna<br />
+          2.2.2. Higienea<br />
+          2.2.3. Antolaketa-neurriak<br />
+          2.2.4. Bisitak eta mezularitza
+        </li>
+        <li class="has-line-data" data-line-start="16" data-line-end="19">
+          SUSMO EDO INFEKZIO KASUETARAKO PREBENTZIO-NEURRIAK<br />
+          3.1. Aurrez-aurreko langileentzako neurriak<br />
+          3.2. Urrutiko langileentzako neurriak
+        </li>
+        <li class="has-line-data" data-line-start="19" data-line-end="20">
+          INSTALAZIOAK GARBITZEA ETA DESINFEKTATZEA
+        </li>
+        <li class="has-line-data" data-line-start="20" data-line-end="21">
+          KONTZILIAZIO NEURRIAK
+        </li>
+        <li class="has-line-data" data-line-start="21" data-line-end="22">
+          ARRISKU-KOLEKTIBOAK
+        </li>
+        <li class="has-line-data" data-line-start="22" data-line-end="23">
+          ESTEKA INTERESGARRIAK
+        </li>
+      </ol>
+      <h2 class="code-line" data-line-start="25" data-line-end="26">
+        <a id="1_AURREKARIAK_25"></a>1. AURREKARIAK
+      </h2>
+      <p class="has-line-data" data-line-start="27" data-line-end="35">
+        2020ko martxoaren 3an sartu zen indarrean Vicomtechen COVID-19ren
+        hedapenak eragindako<br />
+        osasun publikoko egoerari buruzko lehen jarduera-protokoloa eta
+        prebentzio-neurriak. Eusko<br />
+        Jaurlaritzak eta Espainiako Osasun Ministerioak argitaratutako
+        prebentzio neurriak jasotzen<br />
+        zituen. Ondoren, eraikinetatik irteera txukuna egin zen, konfinamenduak
+        irauten zuen bitartean<br />
+        telelana egin ahal izateko. Era berean, COVID-19ri buruzko 10/2020
+        Errege Dekretuaren<br />
+        argitalpenarekin, Vicomtecheko langile gehienek telelanaren modalitatean
+        egin ahal izan zuten<br />
+        beraien lana, dekretu horren 9. artikuluaren arabera ezinbestekoak diren
+        gutxieneko zerbitzu<br />
+        batzuekin.
+      </p>
+      <p class="has-line-data" data-line-start="36" data-line-end="38">
+        Protokolo honetan jasotako jarraibideak Vicomtecheko Zuzendaritzak
+        zehaztu ditu, Osasunaren<br />
+        Mundu Erakundearen, Osasun Ministerioaren eta Eusko Jaurlaritzaren
+        jarraibideen arabera.
+      </p>
+      <p class="has-line-data" data-line-start="39" data-line-end="42">
+        Gertakariak zein abiaduratan aldatzen diren kontuan hartuta, jarraibide
+        horiek egokitu eta<br />
+        baliozkotuko ditu Zuzendaritzak, I+G+B Kudeatzeko Unitatearekin
+        lankidetzan, osasun-agintariek<br />
+        unean-unean ezartzen dituzten jarraibideen arabera.
+      </p>
+      <h2 class="code-line" data-line-start="43" data-line-end="44">
+        <a id="2_KUTSATZEA_SAIHESTEKO_PREBENTZIONEURRI_OROKORRAK_43"></a>2.
+        KUTSATZEA SAIHESTEKO PREBENTZIO-NEURRI OROKORRAK
+      </h2>
+      <p class="has-line-data" data-line-start="45" data-line-end="49">
+        Vicomtechen, laneko arrisku arruntek (pantailak bistaratzea, ergonomia
+        eta bide-segurtasuna) ez<br />
+        dute eraginik birusaren hedapenean. Hala ere, COVID-19aren larrialdiak
+        eragindako ezohiko<br />
+        egoerari dagokionez, Vicomtecheko langile guztiek aurrez aurreko lanera
+        itzultzeko lehen<br />
+        etapetan jarraitu beharreko jarraibideak zehazten dira, eta hurrengo
+        ataletan deskribatzen dira.
+      </p>
+      <h2 class="code-line" data-line-start="50" data-line-end="51">
+        <a
+          id="21_Langileak_Vicomtecheko_instalazioetara_joan_aurretik_eta_ondoren_50"
+        ></a
+        >2.1. Langileak: Vicomtecheko instalazioetara joan aurretik eta ondoren
+      </h2>
+      <pre><code class="has-line-data" data-line-start="53" data-line-end="56">Langile guztiei gogorarazten zaizkie COVID-19k eragiten dituen sintoma orokorrak eta horien
+            iraupena:
+            </code></pre>
+      <ul>
+        <li class="has-line-data" data-line-start="56" data-line-end="57">
+          Baliteke sukarra izatea, 37,8 ° C-ko markara iristen ez den sukarra
+          barne.
+        </li>
+        <li class="has-line-data" data-line-start="57" data-line-end="58">
+          Usaimena gal daiteke.
+        </li>
+        <li class="has-line-data" data-line-start="58" data-line-end="59">
+          Nekea, giharretako mina edo buruko mina izan daiteke.
+        </li>
+        <li class="has-line-data" data-line-start="59" data-line-end="61">
+          Ez da oso litekeena eztarriko mina edo sudurreko jariakina izatea,
+          baina kasu<br />
+          batzuetan gertatzen dira.
+        </li>
+        <li class="has-line-data" data-line-start="61" data-line-end="63">
+          Oro har, sintomek 7 eta 10 egun bitartean irauten dutela dirudi.
+        </li>
+      </ul>
+      <pre><code class="has-line-data" data-line-start="64" data-line-end="68">Sintoma horietakoren bat dutenek lehenbailehen eman beharko lukete horren berri covid@vicomtech.org helbidera eta beraien DARei, Vicomtech-eko instalazioetara joan aurretik.
+            </code></pre>
+      <h2 class="code-line" data-line-start="68" data-line-end="69">
+        <a id="22_Neurriak_Vicomtechen_68"></a>2.2. Neurriak Vicomtechen
+      </h2>
+      <h2 class="code-line" data-line-start="70" data-line-end="71">
+        <a id="221_Instalazioetarako_sarbidea_eta_mugikortasuna_70"></a>2.2.1.
+        Instalazioetarako sarbidea eta mugikortasuna
+      </h2>
+      <ul>
+        <li class="has-line-data" data-line-start="72" data-line-end="75">
+          <p class="has-line-data" data-line-start="72" data-line-end="75">
+            Garajetik Vicomtecherako sarbidea blokeatzen da. Eraikin bakoitzeko
+            ate nagusitik<br />
+            desinfekzioa eta tenperatura neurtu behar dira (protokolo-neurriak
+            ezarriko dira eraikin<br />
+            guztietan, horiek egon arte, 57. eraikinetik sartzen jarraituko da).
+          </p>
+        </li>
+        <li class="has-line-data" data-line-start="75" data-line-end="78">
+          <p class="has-line-data" data-line-start="75" data-line-end="77">
+            57ko 1. solairuan Sistemetatik gertuen dagoen kristalezko atetik
+            sartzen da, eta V6ko<br />
+            atetik irteten da.
+          </p>
+        </li>
+        <li class="has-line-data" data-line-start="78" data-line-end="80">
+          <p class="has-line-data" data-line-start="78" data-line-end="80">
+            Eskaileretan gora eta behera ibiliko gara, eta, lehenik eta behin,
+            norbait aurkituko dugu.<br />
+            Eraikin osoan.
+          </p>
+        </li>
+        <li class="has-line-data" data-line-start="80" data-line-end="82">
+          <p class="has-line-data" data-line-start="80" data-line-end="82">
+            Antzeko funtzionamendua 63an. Salbuespena: laborategietako sarbidea.
+            Igogailuan<br />
+            jaistea; garajeko oinezkoentzako atetik irtetea eraikineko ate
+            nagusirantz.
+          </p>
+        </li>
+        <li class="has-line-data" data-line-start="82" data-line-end="85">
+          <p class="has-line-data" data-line-start="82" data-line-end="85">
+            61erako sarbidea: eraikineko gune komunak, Parkeko argibideei
+            jarraitzea. Igotzeko eta<br />
+            jaisteko eskailerak. Laborategietarako sarbidea: igogailuan jaistea,
+            garajeko<br />
+            oinezkoentzako atetik irtetea eraikineko ate nagusirantz.
+          </p>
+        </li>
+        <li class="has-line-data" data-line-start="85" data-line-end="90">
+          <p class="has-line-data" data-line-start="85" data-line-end="89">
+            71rako sarbidea. Eraikineko eremu komunak, Parkeko argibideei
+            jarraitzea. Behin<br />
+            barruan, itzulia eskuinetik hasiko da, hau da, bilera-geletarako
+            bidea hartzea sartzean,<br />
+            ikertzaileen guneraino iristea eta officearen eta laborategiaren
+            aurrean pasatzen den<br />
+            korridoretik irtetea.
+          </p>
+        </li>
+      </ul>
+      <h2 class="code-line" data-line-start="90" data-line-end="91">
+        <a id="222_Higienea_90"></a>2.2.2. Higienea
+      </h2>
+      <ul>
+        <li class="has-line-data" data-line-start="92" data-line-end="94">
+          Vicomtecheko sarreran sarrera protokolo bat dagoela ikusi ahal izango
+          duzu. Nahitaezkoa<br />
+          izango da eskua gel hidroalkoholikoarekin desinfektatzea bakoitzaren
+          tokira joan aurretik.
+        </li>
+        <li class="has-line-data" data-line-start="94" data-line-end="95">
+          Musukoa eduki ezean, 57ko sarreran har daiteke.
+        </li>
+        <li class="has-line-data" data-line-start="95" data-line-end="99">
+          Ez da beharrezkoa musukoa lanpostuan erabiltzea, kristal bereizlea
+          baitago. Hala ere,<br />
+          musukoa erabili beharko da egin behar den eta pertsonen arteko
+          segurtasun-<br />
+          distantziaren bermerik ez duen edozein jarduerarengatik lanpostua
+          uzten denean ( 2<br />
+          metro).
+        </li>
+        <li class="has-line-data" data-line-start="99" data-line-end="101">
+          Eskuetako higienea mantendu behar da (urarekin eta xaboiarekin edo
+          alkohol-soluzioekin<br />
+          garbitzea), batez ere pertsonekin hurbileko kontaktua izan ondoren.
+        </li>
+        <li class="has-line-data" data-line-start="101" data-line-end="102">
+          Eztul edo doministiku egitean, estali ahoa eta sudurra ukondo
+          flexionatuarekin.
+        </li>
+        <li class="has-line-data" data-line-start="102" data-line-end="104">
+          Erabili eta botatzeko zapiak erabiltzea gomendatzen da eta erabili
+          ondoren dagokion<br />
+          ontzira botatzea.
+        </li>
+        <li class="has-line-data" data-line-start="104" data-line-end="106">
+          Saihestu hurbileko kontaktua (gutxi gorabehera bi metroko distantzia
+          mantenduz) beste<br />
+          pertsona batzuekin.
+        </li>
+        <li class="has-line-data" data-line-start="106" data-line-end="107">
+          Ez ukitu begiak, sudurra eta ahoa, eskuek errazago transmititzen
+          baitute.
+        </li>
+        <li class="has-line-data" data-line-start="107" data-line-end="109">
+          Ateetako heldulekuak, igogailuko botoiak, etab. zuzenean eskuekin eta
+          gorputzeko beste<br />
+          gorputz-adar batzuekin ukitzea ekiditea.
+        </li>
+        <li class="has-line-data" data-line-start="109" data-line-end="111">
+          Etxera itzuli aurretik, eskuak garbitzea gomendatzen dute.
+        </li>
+      </ul>
+      <p class="has-line-data" data-line-start="111" data-line-end="114">
+        Informazio-kartelak daude Vicomtecheko eraikin guztietako komunetan, bai
+        eta gela<br />
+        hidroalkoholikoak ere leku komunetan edo espazioak partekatzen diren
+        lekuetan<br />
+        (fotokopiagailuak eta komunak, adibidez).
+      </p>
+      <h2 class="code-line" data-line-start="115" data-line-end="116">
+        <a id="223_Antolaketaneurriak_115"></a>2.2.3. Antolaketa-neurriak
+      </h2>
+      <ul>
+        <li class="has-line-data" data-line-start="117" data-line-end="121">
+          Rapid proiektuaren bidez Vicomtechen garatutako app bat izango da.
+          Aplikazioa<br />
+          instalatuko da eta Vicomtechen dagoen bitartean erabiliko da
+          (aplikazioa aktibatua eta<br />
+          mugikorra pertsonarekin lekualdatuko da joan-etorrietan). Aplikazioa
+          instalatu nahi ez<br />
+          duten langileek uko egiteko agiri bat sinatu beharko dute.
+        </li>
+        <li class="has-line-data" data-line-start="121" data-line-end="124">
+          Kafe-makinak eta janari-hornitzaileak martxan egongo dira (botoiak
+          ukitzeko eta aurreko<br />
+          puntuan deskribatutako higienea mantentzeko balio duten ateak
+          irekitzeko tresnak<br />
+          ditugu).
+        </li>
+        <li class="has-line-data" data-line-start="124" data-line-end="127">
+          Vicomtech ingurunetik kanpo ez ateratzea gomendatzen da, kutsatzeko
+          arriskua<br />
+          murrizteko, eta ateraz gero, talde txikietan egitea gomendatzen da
+          (2-3 pertsona). Bizi<br />
+          edo Kutxaespaziora joatekotan, talde txikietan egingo da ere (2-3
+          pertsona).
+        </li>
+      </ul>
+      <ul>
+        <li class="has-line-data" data-line-start="129" data-line-end="132">
+          Bileretan pertsonen artean gutxi gorabehera 2 metroko tartea
+          errespetatu beharko dute<br />
+          (bilera-geletako aulkiak arrazoi horrengatik pilatuta ikusiko dituzu).
+          Horrela ez balitz,<br />
+          musukoa eramatea derrigorrezkoa izango da.
+        </li>
+        <li class="has-line-data" data-line-start="132" data-line-end="134">
+          Ateak, oro har, irekita egongo dira (bulegoak, bilera-gelak, etab.),
+          eskuak ez ukitzeko<br />
+          moduan (ahal den neurrian).
+        </li>
+        <li class="has-line-data" data-line-start="134" data-line-end="135">
+          Eraikinen artean (sailen artean) mugitzea saihestuko da, beharrezkoa
+          ez bada.
+        </li>
+        <li class="has-line-data" data-line-start="135" data-line-end="137">
+          Erreminta eta ekipoekin zuzenean lan eginez gero
+          (sistema-lanak/mantentze-lanak edo<br />
+          laborategien erabilera), ondoren eskuak garbituko dira.
+        </li>
+        <li class="has-line-data" data-line-start="137" data-line-end="141">
+          Norberaren ibilgailuan bidaiatzea lehenetsiko da, eta, ibilgailurik ez
+          badago,<br />
+          Vicomtecheko ibilgailuan bidaiatu ahal izango da eta bakarka
+          bidaiatzen saiatuko gara<br />
+          (pertsona gehiago, musukoarekin). Ibilgailua gero desinfektatu egin
+          beharko da<br />
+          (produktuak eta erabiltzeko jarraibideak daude).
+        </li>
+        <li class="has-line-data" data-line-start="141" data-line-end="143">
+          Officeko, sarrerako edo atseden-eremuetako kontzentrazioak saihestuko
+          dira. Arreta<br />
+          berezia lanaldiaren sarrera eta irteera orduetan.
+        </li>
+        <li class="has-line-data" data-line-start="143" data-line-end="145">
+          Pertsona-taldeak (sarrera, etab.) elkartu daitezkeen zonetan edo
+          espazioetan, kopurua<br />
+          murriztu egin beharko da eta musukoa jarriko da.
+        </li>
+        <li class="has-line-data" data-line-start="145" data-line-end="149">
+          Office-ak kafea hartzeko eta jateko irekita egongo dira, baina txandak
+          sailka definituko<br />
+          dira. Bi office berri gaituko dira DHLren eraikinean. Higiene-arauak
+          (lekua erabili ondoren<br />
+          desinfektatzea) eta ikaskideen arteko distantzia (gaitutako aulkiek
+          markatzea) beteko<br />
+          dira.
+        </li>
+        <li class="has-line-data" data-line-start="149" data-line-end="153">
+          Komeni da espazioak aireztatzea arriskua arintzeko; hau da, ahal den
+          neurrian, leihoak<br />
+          irekita izango dira, etengabe aireztatzeko eta airea berritzeko.
+          Ezinezkoa bada, aireztapen<br />
+          behartua erabiliko da (klimatizazioa) Parkeko emariekin (ur hotza).
+        </li>
+      </ul>
+      <h2 class="code-line" data-line-start="153" data-line-end="154">
+        <a id="224_Bisitak_eta_mezularitza_153"></a>2.2.4. Bisitak eta
+        mezularitza
+      </h2>
+      <ul>
+        <li class="has-line-data" data-line-start="155" data-line-end="158">
+          Kanpoko langileek sarrera-protokoloa egin beharko dute: eskuak
+          desinfektatu eta<br />
+          musukoa erabili. Gorputzeko tenperatura 37 ºCtik gorakoa bada, ezin
+          izango da sartu.<br />
+          Sarreran segurtasun-distantzia mantenduko da (segurtasun-linea
+          jarrita).
+        </li>
+        <li class="has-line-data" data-line-start="158" data-line-end="162">
+          Vicomtecheko pertsonaren batek beste erakunde batera joan behar badu,
+          helmugako<br />
+          erakundeak COVID- 19 ari aurre egiteko prebentzio-neurri egokiak
+          betetzen dituela<br />
+          egiaztatuko da.
+        </li>
+      </ul>
+      <h2 class="code-line" data-line-start="162" data-line-end="163">
+        <a id="3_SUSMO_EDO_INFEKZIO_KASUETARAKO_PREBENTZIONEURRIAK_162"></a>3.
+        SUSMO EDO INFEKZIO KASUETARAKO PREBENTZIO-NEURRIAK
+      </h2>
+      <p class="has-line-data" data-line-start="164" data-line-end="165">
+        Atal hau osorik ulertu ahal izateko, komenigarria da honako puntu hauek
+        kontuan hartzea:
+      </p>
+      <ul>
+        <li class="has-line-data" data-line-start="166" data-line-end="169">
+          Susmo-kasutzat hartuko da, COVID-19 sintomak izanik, PCR proba egitera
+          bidali dutena<br />
+          (ondorioz, ez dira kontuan hartuko sintomarik izan gabe proba egiten
+          zaienak, adibidez,<br />
+          ebakuntza aurreko probak edo COVID-19rekin zerikusirik ez duten
+          bestelako infekzioak).
+        </li>
+        <li class="has-line-data" data-line-start="169" data-line-end="176">
+          Kontaktu zuzena edo estua da kasu positibo baten leku berean egon
+          dena, 2 metro baino<br />
+          gutxiagora eta 15 minutu baino gehiagoan. Ez dira kontaktu zuzentzat
+          hartzen beren<br />
+          lanpostuan lanean ari diren pertsonak ezarritako banaketa-kristalekin
+          edo segurtasun-<br />
+          distantziekin (lanpostuak berrikusi dira eta horietako batzuk aldatu
+          dira arrazoi<br />
+          horregatik). Hala ere, arau hori office-ei aplikatzen zaie bazkaltzeko
+          orduan, eta ez litzake<br />
+          aplikatuko kafea hartzeko 15 minutuetan. Mediku edo Vicomtechen
+          irizpidearen arabera,<br />
+          beste kasu batzuk gehitu daitezke.
+        </li>
+      </ul>
+      <h2 class="code-line" data-line-start="178" data-line-end="179">
+        <a id="31_Aurrezaurreko_langileentzako_neurriak_178"></a>3.1.
+        Aurrez-aurreko langileentzako neurriak
+      </h2>
+      <p class="has-line-data" data-line-start="180" data-line-end="181">
+        Vicomtechen erabiliko diren agertoki posibleak eta neurriak honako hauek
+        dira:
+      </p>
+      <ul>
+        <li class="has-line-data" data-line-start="182" data-line-end="188">
+          PRC proba egitera deitua izanez gero eta COVID-19 sintomak izanez
+          gero: egun horretan<br />
+          bertan pertsona etxean geratuko litzateke eta covid@vicomtech.org
+          helbidera abisatuko<br />
+          luke, baita DARari ere. Vicomtechek zuzeneko kontaktuak arakatuko
+          ditu, badaezpada ere<br />
+          (ez osasun protokoloagatik) urrutitik ere lan egingo luketenak,
+          emaitza jakin arte. Kasua<br />
+          baieztatuko balitz, zuzeneko kontaktuei testa egingo litzaieke eta
+          osasun-protokoloei<br />
+          jarraituko zaie.
+        </li>
+        <li class="has-line-data" data-line-start="188" data-line-end="197">
+          Vicomtechetik kanpo baieztatutako kasu baten zuzeneko kontaktua izanez
+          gero:<br />
+          arakatzaileek deitu ondoren, abisatu covid@vicomtech.org helbidera eta
+          DARari.<br />
+          Badaezpada (ez osasun-protokoloaren arabera), zentrotik kanpoko
+          pertsona bat<br />
+          Vicomtecheko langile batekin zuzenean harremanetan jartzen bada,
+          Vicomtecheko<br />
+          langilea ez da instalazioetara etorriko Osasun Sailak baimena eman
+          arte.<br />
+          Kasu guztietan, eta Vicomtechek beharrezkotzat jotzen duenean,
+          kontaktua izan duten eta<br />
+          Osakidetzak deitu ez dien pertsonei PCR testak egitea komeni den
+          ebaluatuko da. Halaber,<br />
+          testak arinduko dira alternatiba pribatuarekin.
+        </li>
+      </ul>
+      <p class="has-line-data" data-line-start="197" data-line-end="199">
+        Kaltetutako eremuak modu arduratsuan desinfektatuko dira eta
+        arakatzaileei beren lana egiten<br />
+        lagunduko zaie.
+      </p>
+      <h2 class="code-line" data-line-start="200" data-line-end="201">
+        <a id="32_Urrutiko_langileentzako_neurriak_200"></a>3.2. Urrutiko
+        langileentzako neurriak
+      </h2>
+      <p class="has-line-data" data-line-start="202" data-line-end="205">
+        Langileen erantzukizuna eskatzen da covid@vicomtech.org helbideari eta
+        DARari informazioa<br />
+        emateko, eta prozedura horren inguruan inguruabar pertsonal
+        garrantzitsurik ba ote dagoen<br />
+        jakiteko, baldin eta organizazioari eragiten badiote (laneko bajak,
+        etab.).
+      </p>
+      <p class="has-line-data" data-line-start="206" data-line-end="210">
+        Infekzioa eragiten duten edo infekzio horren susmoa duten pertsonek
+        (probak egiten ari diren<br />
+        bitartean) Osakidetzaren jarraibideak jarraitu beharko dituzte,
+        covid@vicomtech.org helbidera<br />
+        eta beren DAR propioari jakinarazita. Vicomtechek kasu horietarako behar
+        diren baliabideak<br />
+        emango dizkie.
+      </p>
+      <h2 class="code-line" data-line-start="211" data-line-end="212">
+        <a id="4_INSTALAZIOAK_GARBITZEA_ETA_DESINFEKTATZEA_211"></a>4.
+        INSTALAZIOAK GARBITZEA ETA DESINFEKTATZEA
+      </h2>
+      <p class="has-line-data" data-line-start="213" data-line-end="215">
+        Garbitasuna maiztasunean eta sakoneran indartuko da, batez ere espazio
+        komunetan, hala nola<br />
+        bilera-geletan, atsedenlekuetan eta abarretan.
+      </p>
+      <p class="has-line-data" data-line-start="216" data-line-end="218">
+        Erabilitako produktuak desinfektatzaileak izango dira eta garbiketako
+        langileek beren sektorerako<br />
+        ezarritako prebentzio-neurriak beteko dituzte.
+      </p>
+      <h2 class="code-line" data-line-start="219" data-line-end="220">
+        <a id="5_KONTZILIAZIO_NEURRIAK_219"></a>5. KONTZILIAZIO NEURRIAK
+      </h2>
+      <p class="has-line-data" data-line-start="221" data-line-end="224">
+        Vicomtechek lan-kontziliaziorako prozedura bat du, martxoan aktibatu
+        zena eta erabiltzen ari<br />
+        dena. Pandemia kudeatzeko urrutiko lanaren politikari heldu behar
+        bazaio, eskaera egin beharko<br />
+        da, arrazoia justifikatuta.
+      </p>
+      <h2 class="code-line" data-line-start="225" data-line-end="226">
+        <a id="6_ARRISKUKOLEKTIBOAK_225"></a>6. ARRISKU-KOLEKTIBOAK
+      </h2>
+      <p class="has-line-data" data-line-start="227" data-line-end="228">
+        Arrisku-kolektiboek 2020ko irailaren 7tik aurrera aktibatutako urruneko
+        lan-politikara jo dezakete.
+      </p>
+      <h2 class="code-line" data-line-start="230" data-line-end="231">
+        <a id="7_ESTEKA_INTERESGARRIAK_230"></a>7. ESTEKA INTERESGARRIAK
+      </h2>
+      <p class="has-line-data" data-line-start="232" data-line-end="233">
+        Informazio gehiagorako ondorengo iturri ofizialetara jo daiteke:
+      </p>
+      <ul>
+        <li class="has-line-data" data-line-start="234" data-line-end="237">
+          Eusko Jaurlaritzaren Osasun Saila:
+          <a href="http://www.euskadi.eus/informacion-y-"
+            >http://www.euskadi.eus/informacion-y-recomendaciones-generales-de-actuacion-en-euskadi-ante-el-nuevo-coronavirus/web01-a2gaixo/eu/</a
+          >
+        </li>
+        <li class="has-line-data" data-line-start="237" data-line-end="240">
+          Osasun Ministerioa:<br />
+          <a
+            href="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov-"
+            >https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov-China/home.htm</a
+          ><br />
+        </li>
+        <li class="has-line-data" data-line-start="240" data-line-end="242">
+          Europako Gaixotasunen Prebentzio eta Kontrolerako Zentroa (ECDC):<br />
+          <a href="https://www.ecdc.europa.eu/en/novel-coronavirus-china"
+            >https://www.ecdc.europa.eu/en/novel-coronavirus-china</a
+          >
+        </li>
+        <li class="has-line-data" data-line-start="242" data-line-end="243">
+          Munduko Osasun Erakundea (OMS):
+          <a href="https://www.who.int/health-topics/coronavirus"
+            >https://www.who.int/health-topics/coronavirus</a
+          >
+        </li>
+        <li class="has-line-data" data-line-start="243" data-line-end="248">
+          Eraikinen eta lokalen klimatizazio- eta aireztapen-sistemak
+          erabiltzeko eta mantentzeko<br />
+          gomendioak SARS-COV- 2 sistemaren hedapena prebenitzeko:<br />
+          <a
+            href="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/docu"
+            >https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Recomendaciones_de_operacion_y_mantenimiento.pdf</a
+          ><br />
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
